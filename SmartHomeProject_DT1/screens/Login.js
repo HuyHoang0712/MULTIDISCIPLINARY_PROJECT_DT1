@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { icons, COLORS, HOST } from "../../constants"
+import { icons, COLORS } from "../constants"
 
 
 
 function Login() {
     return (
-        <View>
-            
+        <View style={Styles.container}>
+            <Text>hello</Text>
         </View>
     )
 }
@@ -17,7 +17,9 @@ function Login() {
 
 
 const Styles = StyleSheet.create({
-    
+    container: {
+        
+    }
 })
 
 export default Login;
