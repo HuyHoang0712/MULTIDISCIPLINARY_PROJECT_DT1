@@ -15,6 +15,8 @@ export default function App() {
         async function loadFont() {
             await Font.loadAsync({
                 "Inter-Black": require("./assets/fonts/Inter-Black.ttf"),
+                "Inter-Medium": require("./assets/fonts/Inter-Medium.ttf"),
+                "Inter-Regular": require("./assets/fonts/Inter-Regular.ttf"),
             });
             setFontLoaded(true);
         }
