@@ -10,7 +10,7 @@ const Login = () => {
 
     const navigation = useNavigation();
 
-    // const onSignInPressed = (email, password) => {
+    const onSignInPressed = (email, password) => {
     //     if (email === '' || password === '') {
     //         Alert.alert(
     //             "Error!",
@@ -54,8 +54,8 @@ const Login = () => {
     //                 console.error(error);
     //             });
     //     }
-    //     // navigation.navigate("Home", { accountInfo: {Name: "hehe"} })
-    // };
+        navigation.navigate("Main")
+    };
     const onForgotPasswordPressed = () => {
         navigation.navigate("ForgotPassword")
     };
@@ -98,8 +98,8 @@ const Login = () => {
                 </Text>
                 <CustomInput placeholder="Your Email" value={email} setValue={setEmail} />
                 <CustomInput placeholder="Your Password" value={password} setValue={setPassword} secure={true} />
+                <CustomButton text="Forgot Password?" onPress={onForgotPasswordPressed} type="FOTGOTPASS" />
                 <CustomButton text="Sign In" onPress={() => onSignInPressed(email, password)} />
-                <CustomButton text="Forgot Password" onPress={onForgotPasswordPressed} type="TERTIARY" />
             </View>
             
         </View>

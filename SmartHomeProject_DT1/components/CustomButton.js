@@ -27,7 +27,10 @@ const Styles = StyleSheet.create({
         backgroundColor: COLORS.primary,
     },
 
-    container_TERTIARY: {},
+    container_FOTGOTPASS: {
+        
+    },
+
 
     text: {
         fontWeight: 'bold',
@@ -35,8 +38,10 @@ const Styles = StyleSheet.create({
         fontSize: 20,
     },
 
-    text_TERTIARY: {
-        color: COLORS.darkgray,
+    text_FOTGOTPASS: {
+        alignSelf: 'flex-end',
+        color: COLORS.primary,
+        fontSize: 15
     },
 })
 
