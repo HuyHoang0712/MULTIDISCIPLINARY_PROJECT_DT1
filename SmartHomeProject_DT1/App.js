@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 import { StyleSheet, Text, View } from 'react-native';
-
+import Fan from './screens/Fan';
 import { Login } from './screens';
 
 const Stack = createStackNavigator();
@@ -38,5 +38,6 @@ export default function App() {
       </Stack.Navigator>
 
     </NavigationContainer>
+    //<Fan/>
   );
 }
