@@ -18,6 +18,7 @@ export default function App() {
         "Inter-Medium": require("./assets/fonts/Inter-Medium.ttf"),
         "Inter-Regular": require("./assets/fonts/Inter-Regular.ttf"),
         "Inter-SemiBold": require("./assets/fonts/Inter-SemiBold.ttf"),
+        "Inter-ExtraBold": require("./assets/fonts/Inter-ExtraBold.ttf"),
       });
       setFontLoaded(true);
     }

@@ -5,5 +5,5 @@ import Tabs from "./BottomTab";
 export {
     CustomButton,
     CustomInput,
-    Tabs
+    Tabs,
 }

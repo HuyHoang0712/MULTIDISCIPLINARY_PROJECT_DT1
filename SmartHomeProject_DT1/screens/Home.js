@@ -3,10 +3,47 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from "rea
 import { useNavigation } from "@react-navigation/native";
 
 import { icons, images, COLORS } from "../constants";
-
+import { WeatherTag, HomeTag, SharedAccessTag, RoomTag } from "../components/HomeComponent"
 
 const Home = () => {
     const navigation = useNavigation();
+
+    const accessPeople = [
+        {
+            image: images.person1
+        },
+        {
+            image: images.person2
+        },
+        {
+            image: images.person3
+        },
+        {
+            image: images.person3
+        },
+        {
+            image: images.person3
+        },
+    ]
+
+    const rooms = [
+        {
+            name: 'Living Room',
+            image: images.livingroom
+        },
+        {
+            name: 'Kitchen',
+            image: images.kitchenroom
+        },
+        {
+            name: 'Dining Room',
+            image: images.diningroom
+        },
+        {
+            name: 'Bedroom',
+            image: images.bedroom
+        },
+    ];
 
     return (
         <View style={Styles.container}>
@@ -14,11 +51,32 @@ const Home = () => {
                 <Text
                     style={{
                         fontFamily: 'Inter-SemiBold',
-                        fontSize: 25
+                        fontSize: 25,
+                        color: COLORS.black
                     }}
                 >Hello Danile!</Text>
-                <Text>Welcome to your Smart Home</Text>
+                <Text
+                    style={{
+                        fontFamily: 'Inter-Regular',
+                        fontSize: 16,
+                    }}
+                >Welcome to your Smart Home</Text>
             </View>
+            <WeatherTag />
+            <HomeTag 
+                titleTag="Shared Access"
+                SubTag={SharedAccessTag}
+                data={accessPeople}
+                styleContainer={Styles.shareAccessContainer}
+                type="SHARED_ACCESS"
+            />
+            <HomeTag 
+                titleTag="Rooms"
+                SubTag={RoomTag}
+                data={rooms}
+                styleContainer={Styles.room}
+                type="ROOM_TAG"
+            />
         </View>
     )
 };
@@ -31,11 +89,19 @@ const Styles = StyleSheet.create({
 
         backgroundColor: COLORS.light_gray,
 
-        paddingTop: 150,
+        paddingTop: 130,
     },
     tilte: {
-        width: '80%',
-        backgroundColor: 'red'
+        width: '90%',
+    },
+    shareAccessContainer: {
+        width: '95%',
+        alignSelf: 'flex-end',
+    },
+    room: {
+        width: '95%',
+        height: '50%',
+        alignSelf: 'flex-end',
     }
 });
 
