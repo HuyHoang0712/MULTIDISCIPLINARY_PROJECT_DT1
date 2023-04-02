@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import * as Font from "expo-font";
 import { StyleSheet, Text, View } from "react-native";
 
-import { Login, Home } from "./screens";
+import Login from "./screens/Login";
 import { Tabs } from "./components";
 
 const Stack = createStackNavigator();
@@ -17,6 +17,7 @@ export default function App() {
         "Inter-Black": require("./assets/fonts/Inter-Black.ttf"),
         "Inter-Medium": require("./assets/fonts/Inter-Medium.ttf"),
         "Inter-Regular": require("./assets/fonts/Inter-Regular.ttf"),
+        "Inter-SemiBold": require("./assets/fonts/Inter-SemiBold.ttf"),
       });
       setFontLoaded(true);
     }

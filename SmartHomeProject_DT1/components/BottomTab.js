@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { createBottomTabNavigator, BottomTabBar } from "@react-navigation/bottom-tabs";
 
-import { Home } from "../screens";
+import { HomePage } from "../screens";
 import { icons, COLORS } from "../constants";
 
 const Tab = createBottomTabNavigator();
@@ -14,16 +14,11 @@ const Tabs = ({route}) => {
                 tabBarShowLabel: false,
                 headerShown: false,
             }}
-            initialRouteName={"Home"}
+            initialRouteName={"HomePage"}
         >
             <Tab.Screen 
-                name="Home"
-                component={Home}
-                options={{
-                    headerShown: true,
-                    headerShadowVisible: false,
-                    
-                }}
+                name="HomePage"
+                component={HomePage}
             />
         </Tab.Navigator>
     )
