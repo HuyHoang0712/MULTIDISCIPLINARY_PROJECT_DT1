@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-paper';
 
-const SharedAccessTag = ({props}) => {
+const SharedAccessTag = ({props, navigation}) => {
     const {image} = props;
 
     return (

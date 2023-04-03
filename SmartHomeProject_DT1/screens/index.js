@@ -1,7 +1,10 @@
 import Light from "./Light";
-import HomePage from "./HomePage";
-
+import RoomPage from "./RoomPage";
+import Room from "./Room";
+import Home from "./Home";
 export {
     Light,
-    HomePage,
+    RoomPage,
+    Room,
+    Home
 }

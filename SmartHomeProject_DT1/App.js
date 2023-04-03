@@ -5,6 +5,7 @@ import * as Font from "expo-font";
 import { StyleSheet, Text, View } from "react-native";
 
 import Login from "./screens/Login";
+import { Room } from "./screens";
 import { Tabs } from "./components";
 
 const Stack = createStackNavigator();
@@ -19,6 +20,7 @@ export default function App() {
         "Inter-Regular": require("./assets/fonts/Inter-Regular.ttf"),
         "Inter-SemiBold": require("./assets/fonts/Inter-SemiBold.ttf"),
         "Inter-ExtraBold": require("./assets/fonts/Inter-ExtraBold.ttf"),
+        "Inter-Bold": require("./assets/fonts/Inter-Bold.ttf"),
       });
       setFontLoaded(true);
     }
@@ -37,6 +39,7 @@ export default function App() {
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Main" component={Tabs} />
+        <Stack.Screen name="Room" component={Room} />
       </Stack.Navigator>
     </NavigationContainer>
   );

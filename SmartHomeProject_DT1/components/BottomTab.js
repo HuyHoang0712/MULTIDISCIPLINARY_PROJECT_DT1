@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { createBottomTabNavigator, BottomTabBar } from "@react-navigation/bottom-tabs";
+import { Avatar } from "react-native-paper";
 
-import { HomePage } from "../screens";
+import { Home, RoomPage } from "../screens";
 import { icons, COLORS } from "../constants";
 
 const Tab = createBottomTabNavigator();
@@ -14,11 +15,39 @@ const Tabs = ({route}) => {
                 tabBarShowLabel: false,
                 headerShown: false,
             }}
-            initialRouteName={"HomePage"}
+            initialRouteName={"Home"}
         >
             <Tab.Screen 
-                name="HomePage"
-                component={HomePage}
+                name="Home"
+                component={Home}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <Avatar.Icon 
+                            size={40}
+                            icon={focused? icons.home:icons.home_fill}
+                            color={focused? COLORS.white:COLORS.primary}
+                            style={{
+                                backgroundColor: focused? COLORS.primary:COLORS.white
+                            }}
+                        />
+                    )
+                }}
+            />
+            <Tab.Screen 
+                name="RoomPage"
+                component={RoomPage}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <Avatar.Icon 
+                            size={40}
+                            icon={focused? icons.home:icons.home_fill}
+                            color={focused? COLORS.white:COLORS.primary}
+                            style={{
+                                backgroundColor: focused? COLORS.primary:COLORS.white
+                            }}
+                        />
+                    )
+                }}
             />
         </Tab.Navigator>
     )

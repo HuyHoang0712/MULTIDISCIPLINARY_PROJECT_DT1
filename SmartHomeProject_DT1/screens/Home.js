@@ -5,8 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { icons, images, COLORS } from "../constants";
 import { WeatherTag, HomeTag, SharedAccessTag, RoomTag } from "../components/HomeComponent"
 
-const Home = () => {
-    const navigation = useNavigation();
+const Home = ({navigation}) => {
 
     const accessPeople = [
         {
@@ -62,7 +61,7 @@ const Home = () => {
                     }}
                 >Welcome to your Smart Home</Text>
             </View>
-            <WeatherTag />
+            <WeatherTag type=""/>
             <HomeTag 
                 titleTag="Shared Access"
                 SubTag={SharedAccessTag}
@@ -76,6 +75,7 @@ const Home = () => {
                 data={rooms}
                 styleContainer={Styles.room}
                 type="ROOM_TAG"
+                navigation={navigation}
             />
         </View>
     )
@@ -89,7 +89,8 @@ const Styles = StyleSheet.create({
 
         backgroundColor: COLORS.light_gray,
 
-        paddingTop: 130,
+        paddingTop: 120,
+        paddingBottom:10
     },
     tilte: {
         width: '90%',

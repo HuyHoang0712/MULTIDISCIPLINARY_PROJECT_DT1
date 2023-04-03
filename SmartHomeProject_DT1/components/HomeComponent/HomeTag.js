@@ -5,7 +5,7 @@ import { COLORS, icons, images } from "../../constants";
 import { IconButton } from "react-native-paper";
 
 
-const HomeTags = ({ titleTag, SubTag, data, styleContainer, type }) => {
+const HomeTags = ({ titleTag, SubTag, data, styleContainer, type, navigation}) => {
     return (
         <View style={styleContainer}>
             <View style={Styles.titleContainer}>
@@ -19,7 +19,7 @@ const HomeTags = ({ titleTag, SubTag, data, styleContainer, type }) => {
             >
                 {data.map((item, index) => {
 
-                    return <SubTag key={index} props={item}/>;
+                    return <SubTag key={index} props={item} navigation={navigation}/>;
                 })}
 
                 {type == "SHARED_ACCESS" && (

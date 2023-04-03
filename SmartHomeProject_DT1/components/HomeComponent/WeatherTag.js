@@ -4,9 +4,9 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import { Divider } from "@rneui/themed";
 import { COLORS, images } from "../../constants";
 
-const WeatherTag = () => {
+const WeatherTag = ({type}) => {
     return (
-        <View style={[Styles.container, Styles.shawdowProp]}>
+        <View style={[Styles[`container${type}`], Styles.shawdowProp]}>
             <View style={Styles.temperature}>
                 <Image source={images.sunny} style={Styles.image}/>
                 <Text style={Styles.text}>28ºC</Text>
@@ -31,6 +31,16 @@ const Styles = StyleSheet.create ({
         paddingLeft: 20,
         borderTopLeftRadius: 10,
         borderBottomLeftRadius: 10,
+        backgroundColor: COLORS.light_gray,
+    },
+    containerROOM: {
+        width: '80%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingVertical: 10,
+        paddingRight: 10,
+        paddingLeft: 20,
+        borderRadius: 10,
         backgroundColor: COLORS.light_gray,
     },
     temperature: {
