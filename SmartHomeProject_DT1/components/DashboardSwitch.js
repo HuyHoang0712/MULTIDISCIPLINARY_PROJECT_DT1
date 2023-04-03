@@ -17,6 +17,7 @@ function DashboardSwitch(props) {
             <View style={styles.control_container}>
                 <View style={[styles.control_inside, { flexDirection: 'column' }]}>
                     <SwitchDevice
+                        key={switchStates[0].id}
                         title={switchStates[0].name}
                         isEnabled={switchStates[0].isEnabled}
                         image={false}
@@ -24,6 +25,7 @@ function DashboardSwitch(props) {
                     <View style={styles.switchContainer}>
                         {switchStates.slice(1, 4).map(eachSwitch =>
                             <SwitchDevice
+                                key={eachSwitch.id}
                                 title={eachSwitch.name}
                                 isEnabled={eachSwitch.isEnabled}
                                 image={true}
@@ -35,6 +37,7 @@ function DashboardSwitch(props) {
             <View style={styles.control_container}>
                 <View style={[styles.control_inside, { flexDirection: 'column' }]}>
                     <SwitchDevice
+                        key={switchStates[4].id}
                         title={switchStates[4].name}
                         isEnabled={switchStates[4].isEnabled}
                         image={false}
@@ -42,6 +45,7 @@ function DashboardSwitch(props) {
                     <View style={styles.switchContainer}>
                         {switchStates.slice(5, 8).map(eachSwitch =>
                             <SwitchDevice
+                                key={eachSwitch.id}
                                 title={eachSwitch.name}
                                 isEnabled={eachSwitch.isEnabled}
                                 image={true}

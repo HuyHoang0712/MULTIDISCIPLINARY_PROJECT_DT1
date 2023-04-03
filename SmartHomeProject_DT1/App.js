@@ -24,20 +24,20 @@ export default function App() {
         return <Text>Loading...</Text>;
   }
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-        initialRouteName={'Login'}
-      >
-        <Stack.Screen name="Login" component={Login} />
-        {/* <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="UserProfile" component={UserProfile} /> */}
+    // <NavigationContainer>
+    //   <Stack.Navigator
+    //     screenOptions={{
+    //       headerShown: false,
+    //     }}
+    //     initialRouteName={'Login'}
+    //   >
+    //     <Stack.Screen name="Login" component={Login} />
+    //     {/* <Stack.Screen name="Home" component={Home} />
+    //     <Stack.Screen name="UserProfile" component={UserProfile} /> */}
 
-      </Stack.Navigator>
+    //   </Stack.Navigator>
 
-    </NavigationContainer>
-    //<Fan/>
+    // </NavigationContainer>
+    <Fan/>
   );
 }
