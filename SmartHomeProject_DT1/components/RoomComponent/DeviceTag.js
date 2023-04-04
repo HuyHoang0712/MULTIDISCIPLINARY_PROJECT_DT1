@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import { COLORS } from "../../constants";
 
 
-const DeviceTag = ({device}) => {
+const DeviceTag = ({device, navigation, roomInfor}) => {
     const [active, setActive] = useState(false)
 
     let { name, icon } = device;
@@ -12,6 +12,9 @@ const DeviceTag = ({device}) => {
         <Pressable
             onPress={() => {
                 setActive(!active);
+            }}
+            onLongPress={() => {
+                navigation.navigate(name, {roomInfor: roomInfor})
             }}
         >
             <View style={Styles.container}> 

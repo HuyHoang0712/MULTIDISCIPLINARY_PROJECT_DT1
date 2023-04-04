@@ -41,7 +41,7 @@ const Room = ({ navigation, route }) => {
                         icon={icons.arrow_back}
                         iconColor={COLORS.white}
                         size={35}
-                        onPress={() => navigation.navigate("Home")}
+                        onPress={() => navigation.goBack()}
                     />
                 </View>
                 <View style={Styles.title}>
@@ -66,12 +66,12 @@ const Room = ({ navigation, route }) => {
                 <DeviceManage />
                 <View style={Styles.deviceContainer}>
                     <View style={Styles.box1}>
-                        <DeviceTag device={devices[0]}/>
-                        <DeviceTag device={devices[1]}/>
+                        <DeviceTag device={devices[0]} navigation={navigation} roomInfor={roomInfor}/>
+                        <DeviceTag device={devices[1]} navigation={navigation} roomInfor={roomInfor}/>
                     </View>
                     <View style={Styles.box1}>
-                        <DeviceTag device={devices[2]}/>
-                        <DeviceTag device={devices[3]}/>
+                        <DeviceTag device={devices[2]} navigation={navigation} roomInfor={roomInfor}/>
+                        <DeviceTag device={devices[3]} navigation={navigation} roomInfor={roomInfor}/>
                     </View>
                 </View>
                 <View style={Styles.energyBox}>
