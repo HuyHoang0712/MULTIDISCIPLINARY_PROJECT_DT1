@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import { createBottomTabNavigator, BottomTabBar } from "@react-navigation/bottom-tabs";
 import { Avatar } from "react-native-paper";
 
-import { Home, RoomPage } from "../screens";
+import { Home, UserProfile } from "../screens";
 import { icons, COLORS } from "../constants";
 
 const Tab = createBottomTabNavigator();
@@ -34,13 +34,13 @@ const Tabs = ({route}) => {
                 }}
             />
             <Tab.Screen 
-                name="RoomPage"
-                component={RoomPage}
+                name="UserProfile"
+                component={UserProfile}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Avatar.Icon 
                             size={40}
-                            icon={focused? icons.home:icons.home_fill}
+                            icon={focused? icons.user_profile:icons.user_profile_fill}
                             color={focused? COLORS.white:COLORS.primary}
                             style={{
                                 backgroundColor: focused? COLORS.primary:COLORS.white

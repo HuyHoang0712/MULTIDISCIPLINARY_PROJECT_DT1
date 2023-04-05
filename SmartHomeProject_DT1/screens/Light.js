@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet, Text, ScrollView } from "react-native";
 
-import { HeaderDevice, SliderInput, ModeDevide } from "../components/DeviceComponent";
+import { HeaderDevice, SliderInput, ModeDevide, AdvancedMode } from "../components/DeviceComponent";
 import { images, icons, COLORS } from "../constants";
 
 const Light = ({navigation, route}) => {
 
+    const deviceInfor = {
+        name: 'Light',
+        curPower: 0.6
+    }
+    
     const deviceMode = [
         {
             name: 'Auto Mode'
@@ -13,19 +18,44 @@ const Light = ({navigation, route}) => {
         {
             name: 'Saving Energy Mode'
         },
+    ]
+
+    const advancedMode = [
         {
-            name: 'Slepp Mode'
-        }
+            name: "Sleep",
+            start_time: "22:00",
+            end_time: "6:00"
+        },
+        {
+            name: "Home Theater",
+            start_time: "20:00",
+            end_time: "21:00"
+        },
+        {
+            name: "Home Theater",
+            start_time: "20:00",
+            end_time: "21:00"
+        },
     ]
 
     let { roomInfor } = route.params;
     return (
         <View style={Styles.container}>
-            <HeaderDevice navigation={navigation} roomInfor={roomInfor} type="LIGHT"/>
-            <SliderInput />
-            {deviceMode.map((mode, index) => 
-                <ModeDevide key={index} modeInfor={mode}/>
-            )}
+            <HeaderDevice navigation={navigation} roomInfor={roomInfor} type="Light"/>
+            <SliderInput deviceInfor={deviceInfor}/>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{ alignItems: 'center'}}
+                style={Styles.scrollview}
+            >
+                {deviceMode.map((mode, index) => 
+                    <ModeDevide key={index} modeInfor={mode}/>
+                )}
+                {advancedMode.map((mode, index) => 
+                    <AdvancedMode key={index} modeInfor={mode}/>
+                )}
+            </ScrollView>
+            
         </View>
     );
 };
@@ -36,9 +66,14 @@ const Styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         paddingTop: 55,
-
+        paddingBottom: 20,
         backgroundColor: COLORS.light_gray
     },
+    scrollview: {
+        width: '100%',
+        paddingBottom: 10,
+        marginTop: 20
+    }
 })
 
 export default Light;

@@ -5,14 +5,15 @@ import Slider from "@react-native-community/slider";
 
 import { icons, COLORS, } from "../../constants";
 import CustomSlider from "./CustomSlider";
-const SliderInput = () => {
-    const [slideValue, setSlideValue] = useState(0.5);
+const SliderInput = ({deviceInfor}) => {
+    let { name, curPower} = deviceInfor;
+    const [slideValue, setSlideValue] = useState(curPower);
 
 
     return (
         <View style={Styles.container}>
             <View style={Styles.title}>
-                <Text style={Styles.text1}>Lightness</Text>
+                <Text style={Styles.text1}>{name == "Light"? "Lightness":"Power"}</Text>
                 <Text style={Styles.text2}>{parseInt(slideValue*100)}%</Text>
             </View>
             <CustomSlider slideValue={slideValue} setSlideValue={setSlideValue} />

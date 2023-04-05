@@ -15,7 +15,7 @@ const HeaderDevice = ({navigation, roomInfor, type}) => {
                     onPress={() => navigation.goBack()}
                 />
                 <Text style={[Styles.text, Styles.smart]}>Smart</Text>
-                <Text style={[Styles.text, Styles.light]}>{type == "LIGHT"? "Light":""}</Text>
+                <Text style={[Styles.text, Styles.light]}>{type}</Text>
                 <Text 
                     style={{
                         fontFamily:'Inter-Medium',

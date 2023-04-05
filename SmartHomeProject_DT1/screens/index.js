@@ -1,11 +1,12 @@
 import Light from "./Light";
-import RoomPage from "./RoomPage";
+import UserProfile from "./UserProfile";
 import Room from "./Room";
 import Home from "./Home";
-
+import Fan from "./Fan";
 export {
     Light,
-    RoomPage,
     Room,
     Home,
+    UserProfile,
+    Fan
 }

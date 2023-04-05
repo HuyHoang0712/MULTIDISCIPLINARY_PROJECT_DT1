@@ -13,7 +13,7 @@ const ModeDevide = ({ modeInfor }) => {
     const Styles = StyleSheet.create({
         container: {
             width: '90%',
-            marginTop: 20,
+            marginBottom: 20,
             paddingVertical: 5,
             paddingHorizontal: 10,
             backgroundColor: isSwitchOn ? COLORS.primary : COLORS.white,
