@@ -62,7 +62,7 @@ const Login = () => {
     return (
         <View style={Styles.container}>
             <View style={Styles.title}>
-                <Image style={Styles.logo} source={icons.smarthome_icon} />
+                 <Image style={Styles.logo} source={icons.smarthome_icon} />
                 <View style={Styles.title1}>
                     <Text
                     style={{

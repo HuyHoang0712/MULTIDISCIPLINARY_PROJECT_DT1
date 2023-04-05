@@ -1,18 +1,31 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { View, Switch, Platform, TouchableOpacity, Image, StyleSheet, Text } from "react-native";
-import { IconButton, ProgressBar } from "react-native-paper";
+import { View, Image, StyleSheet, Text } from "react-native";
 
-import { HeaderDevice, SliderInput } from "../components/DeviceComponent";
+import { HeaderDevice, SliderInput, ModeDevide } from "../components/DeviceComponent";
 import { images, icons, COLORS } from "../constants";
 
 const Light = ({navigation, route}) => {
+
+    const deviceMode = [
+        {
+            name: 'Auto Mode'
+        },
+        {
+            name: 'Saving Energy Mode'
+        },
+        {
+            name: 'Slepp Mode'
+        }
+    ]
+
     let { roomInfor } = route.params;
     return (
         <View style={Styles.container}>
             <HeaderDevice navigation={navigation} roomInfor={roomInfor} type="LIGHT"/>
             <SliderInput />
-            <Text>Hello</Text>
+            {deviceMode.map((mode, index) => 
+                <ModeDevide key={index} modeInfor={mode}/>
+            )}
         </View>
     );
 };
