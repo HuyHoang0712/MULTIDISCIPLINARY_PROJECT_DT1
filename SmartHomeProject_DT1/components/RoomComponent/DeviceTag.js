@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 
 import { COLORS } from "../../constants";
@@ -8,6 +8,23 @@ const DeviceTag = ({device, navigation, roomInfor}) => {
     const [active, setActive] = useState(false)
 
     let { name, icon } = device;
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:5000/turnOnFan", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                data: 1
+            }),
+        })
+        .then(response => response.json())
+        .catch(error => {
+            console.error(error);
+        });
+    }, [active])
+
     return (
         <Pressable
             onPress={() => {
