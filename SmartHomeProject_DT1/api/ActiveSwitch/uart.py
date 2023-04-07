@@ -1,5 +1,14 @@
 import serial.tools.list_ports
+import mysql.connector
+import database
 
+
+conn = mysql.connector.connect(
+    host='localhost',
+    password='hieu1905',
+    user='root',
+    database='smartHome'
+)
 #find Port
 def getPort():
     ports = serial.tools.list_ports.comports()
@@ -20,10 +29,18 @@ def processData(client, data):
     data = data.replace("#", "")
     splitData = data.split(":")
     print(splitData)
+    value = splitData[2]
+
+    if value == None or float(value) < 0:
+        print("Invalid input value")
+        return
+
     if splitData[1] == "T":
         client.publish("cambien1", splitData[2])
+        # database.insertHumidTemp(conn, 1, 0,float(value))
     elif splitData[1] == "H":
         client.publish("cambien2", splitData[2])
+        # database.insertHumidTemp(conn, 1, float(value), 0)
 
 
 mess = ''
