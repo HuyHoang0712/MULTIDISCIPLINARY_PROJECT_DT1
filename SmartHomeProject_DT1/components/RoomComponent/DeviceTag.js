@@ -9,20 +9,38 @@ const DeviceTag = ({device, navigation, roomInfor}) => {
 
     let { name, icon } = device;
 
+    const sendDataToServer = async () => {
+        const data = {
+            data: 1
+            // Add other data as needed
+        };
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/turnOnFan', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Add other headers as needed
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                // Request was successful
+                const result = await response.json();
+                console.log(result);
+            } else {
+                // Request failed
+                console.error('Error:', response.status);
+            }
+        } catch (error) {
+            // Catch any other errors
+            console.error('Error:', error);
+        }
+    };
+
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/turnOnFan", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                data: 1
-            }),
-        })
-        .then(response => response.json())
-        .catch(error => {
-            console.error(error);
-        });
+        sendDataToServer()
     }, [active])
 
     return (
