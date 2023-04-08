@@ -11,7 +11,7 @@ const WeatherTag = ({type}) => {
 
     const [temp, setTemp] = useState(60);
     const [humidity, setHumidity] = useState(60);
-
+    const humi = 50;
     useEffect(() => {
         const timerId = setTimeout(() => {
             getHumidTemp('cambien1');
@@ -20,7 +20,7 @@ const WeatherTag = ({type}) => {
         return () => {
             clearTimeout(timerId);
         };
-    }, []);
+    });
 
     const getHumidTemp = async (feedKey) => {
         try {
@@ -32,17 +32,22 @@ const WeatherTag = ({type}) => {
               method: 'GET',
               headers: {
                 accept: 'application/json',
-                'X-AIO-Key': 'aio_dJLZ41V7TeBG0YQyuIVAH0CeBNPf' 
+                'X-AIO-Key': 'aio_Trhz71ibB4eYM01QlLNEtcZrdjCf' 
               }
             });
       
             if (response.status === 200) {
               const result = await response.json();
 
-              if (feedKey === 'cambien1') {
-                setTemp(result.last_value);
-              } else {
-                setHumidity(result.last_value);
+              if (result && result.length > 0) {
+                const value = parseFloat(result[0].value);
+                if (!isNaN(value)) {
+                  if (feedKey === 'cambien1') {
+                    setTemp(value);
+                  } else {
+                    setHumidity(value);
+                  }
+                }
               }
             } else {
               console.error('Error:', response.status);
