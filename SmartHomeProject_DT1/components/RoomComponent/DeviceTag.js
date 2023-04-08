@@ -26,7 +26,7 @@ const DeviceTag = ({device, navigation, roomInfor}) => {
                 method: 'POST',
                 headers: {
                     accept:'application/json',
-                    'X-AIO-Key':'aio_vySS34DTSezMYNwH8E5XGsWAxY64',
+                    'X-AIO-Key':'aio_clIm99g3FXRiRA0kxkLbaooZsidi',
                     'Content-Type':'application/json'
                 },
                 body: JSON.stringify({value}),
