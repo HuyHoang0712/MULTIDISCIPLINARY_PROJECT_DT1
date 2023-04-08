@@ -9,14 +9,17 @@ import { COLORS, images } from "../../constants";
 
 const WeatherTag = ({type}) => {
 
-    const [cambienValue, setCambienValue] = useState({
-        Temp: 60,
-        Humid: 60
-    });
+    const [temp, setTemp] = useState(60);
+    const [humidity, setHumidity] = useState(60);
 
     useEffect(() => {
-        getHumidTemp('cambien1');
-        getHumidTemp('cambien2');
+        const timerId = setTimeout(() => {
+            getHumidTemp('cambien1');
+        }, 10000);
+    
+        return () => {
+            clearTimeout(timerId);
+        };
     }, []);
 
     const getHumidTemp = async (feedKey) => {
@@ -29,18 +32,17 @@ const WeatherTag = ({type}) => {
               method: 'GET',
               headers: {
                 accept: 'application/json',
-                'X-AIO-Key': 'aio_clIm99g3FXRiRA0kxkLbaooZsidi' 
+                'X-AIO-Key': 'aio_dJLZ41V7TeBG0YQyuIVAH0CeBNPf' 
               }
             });
       
             if (response.status === 200) {
-
               const result = await response.json();
 
               if (feedKey === 'cambien1') {
-                setCambienValue(prevValue => ({...prevValue, Temp: result.last_value}));
+                setTemp(result.last_value);
               } else {
-                setCambienValue(prevValue => ({...prevValue, Humid: result.last_value}));
+                setHumidity(result.last_value);
               }
             } else {
               console.error('Error:', response.status);
@@ -54,11 +56,11 @@ const WeatherTag = ({type}) => {
         <View style={[Styles[`container${type}`], Styles.shawdowProp]}>
             <View style={Styles.temperature}>
                 <Image source={images.sunny} style={Styles.image}/>
-                <Text style={Styles.text}>{cambienValue.Temp}</Text>
+                <Text style={Styles.text}>{temp}</Text>
             </View>
             <Divider orientation="vertical" color={COLORS.black} />
             <View style={Styles.humidity}>
-                <Text style={Styles.text}>{cambienValue.Humid}</Text>
+                <Text style={Styles.text}>{humidity}</Text>
                 <Text style={Styles.text1}>Humidity</Text>
             </View>
         </View>
