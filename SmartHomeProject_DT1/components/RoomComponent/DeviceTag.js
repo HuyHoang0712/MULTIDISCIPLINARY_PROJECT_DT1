@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
-
+// import fetch from "react-native-fetch";
 import { COLORS } from "../../constants";
 
 
@@ -9,24 +9,30 @@ const DeviceTag = ({device, navigation, roomInfor}) => {
 
     let { name, icon } = device;
 
+    const [data, setData] = useState({
+        feedName: '',
+        value: '' 
+    });
+
     const sendDataToServer = async () => {
-        const data = {
-            data: 1
-            // Add other data as needed
-        };
+
+        const { feedName, value } = data;
+
+        const baseUrl = 'https://io.adafruit.com/api/v2/Huy_Hieu/feeds/';
+        const urlServerAPI = `${baseUrl}${feedName}/data`;
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/turnOnFan', {
+            const response = await fetch(urlServerAPI, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    // Add other headers as needed
+                    accept:'application/json',
+                    'X-AIO-Key':'aio_vySS34DTSezMYNwH8E5XGsWAxY64',
+                    'Content-Type':'application/json'
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify({value}),
             });
-
-            if (response.ok) {
-                // Request was successful
+    
+            if (response.status === 200) {
                 const result = await response.json();
                 console.log(result);
             } else {
@@ -38,16 +44,22 @@ const DeviceTag = ({device, navigation, roomInfor}) => {
             console.error('Error:', error);
         }
     };
+    
 
     useEffect(() => {
         sendDataToServer()
-    }, [active])
+    }, [data])
+
+    const onPressHandler = () => {
+        setActive(!active);
+        const feedName = name === 'Light' ? 'nutnhan2' : 'nutnhan1';
+        const value = data.value === '1' ? '0' : '1';
+        setData({feedName, value});
+    };
 
     return (
         <Pressable
-            onPress={() => {
-                setActive(!active);
-            }}
+            onPress={onPressHandler}
             onLongPress={() => {
                 navigation.navigate(name, {roomInfor: roomInfor})
             }}
