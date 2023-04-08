@@ -12,19 +12,27 @@ const Room = ({ navigation, route }) => {
     const devices = [
         {
             name: 'Light',
-            icon: icons.light
+            icon: icons.light,
+            feedName: 'nutnhan2',
+            value: 0
         },
         {
             name: 'Sound',
-            icon: icons.sound
+            icon: icons.sound,
+            feedName: 'nutnhan2',
+            value: 0
         },
         {
             name: 'Fan',
-            icon: icons.fan
+            icon: icons.fan,
+            feedName: 'nutnhan1',
+            value: 0
         },
         {
             name: 'Heater',
-            icon: icons.heater
+            icon: icons.heater,
+            feedName: 'nutnhan2',
+            value: 0
         }
     ]
 

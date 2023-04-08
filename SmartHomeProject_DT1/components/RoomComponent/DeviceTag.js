@@ -5,18 +5,12 @@ import { COLORS } from "../../constants";
 
 
 const DeviceTag = ({device, navigation, roomInfor}) => {
-    const [active, setActive] = useState(false)
 
-    let { name, icon } = device;
+    let { name, icon, feedName, value } = device;
+    const [active, setActive] = useState(value == 0? false:true)
 
-    const [data, setData] = useState({
-        feedName: '',
-        value: '' 
-    });
-
+    console.log(device)
     const sendDataToServer = async () => {
-
-        const { feedName, value } = data;
 
         const baseUrl = 'https://io.adafruit.com/api/v2/Huy_Hieu/feeds/';
         const urlServerAPI = `${baseUrl}${feedName}/data`;
@@ -29,7 +23,7 @@ const DeviceTag = ({device, navigation, roomInfor}) => {
                     'X-AIO-Key':'aio_Trhz71ibB4eYM01QlLNEtcZrdjCf',
                     'Content-Type':'application/json'
                 },
-                body: JSON.stringify({value}),
+                body: JSON.stringify({value: active? 1: 0}),
             });
     
             if (response.status === 200) {
@@ -48,13 +42,10 @@ const DeviceTag = ({device, navigation, roomInfor}) => {
 
     useEffect(() => {
         sendDataToServer()
-    }, [data])
+    }, [active])
 
     const onPressHandler = () => {
         setActive(!active);
-        const feedName = name === 'Light' ? 'nutnhan2' : 'nutnhan1';
-        const value = data.value === '1' ? '0' : '1';
-        setData({feedName, value});
     };
 
     return (

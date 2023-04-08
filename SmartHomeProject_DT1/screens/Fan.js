@@ -33,6 +33,43 @@ const Fan = ({navigation, route}) => {
         },
     ]
 
+
+    // const [fanInfor, setFanInfor] = useState()
+
+    // const getFanInfor = async() =>{
+    //     try {
+    //         const baseUrl = 'https://io.adafruit.com/api/v2/Huy_Hieu/feeds/';
+    //         const dataUrl = '/data?include=value&limit=1';
+    //         const url = `${baseUrl}/cambien2/${dataUrl}`; // Construct the URL
+      
+    //         const response = await fetch(url, {
+    //           method: 'GET',
+    //           headers: {
+    //             accept: 'application/json',
+    //             'X-AIO-Key': 'aio_Trhz71ibB4eYM01QlLNEtcZrdjCf' 
+    //           }
+    //         });
+      
+    //         if (response.status === 200) {
+    //           const result = await response.json();
+
+    //           if (result && result.length > 0) {
+    //             const value = parseFloat(result[0].value);
+    //             if (!isNaN(value)) {
+    //                 setFanInfor(value)
+    //             }
+    //           }
+    //         } else {
+    //           console.error('Error:', response.status);
+    //         }
+    //       } catch (error) {
+    //         console.error('Error:', error);
+    //       }
+    // }
+    // useEffect(() => {
+    //     getFanInfor()
+    // }, [])
+
     let { roomInfor } = route.params;
     return (
         <View style={Styles.container}>

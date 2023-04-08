@@ -15,6 +15,7 @@ const WeatherTag = ({type}) => {
     useEffect(() => {
         const timerId = setTimeout(() => {
             getHumidTemp('cambien1');
+            getHumidTemp('cambien2');
         }, 10000);
     
         return () => {
