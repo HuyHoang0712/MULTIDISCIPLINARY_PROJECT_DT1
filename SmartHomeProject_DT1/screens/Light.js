@@ -5,13 +5,9 @@ import { HeaderDevice, SliderInput, ModeDevide, AdvancedMode } from "../componen
 import { images, icons, COLORS } from "../constants";
 
 const Light = ({navigation, route}) => {
-
-    const deviceInfor = {
-        name: 'Light',
-        curPower: 0.6
-    }
     
     const [lightInfor, setLightInfor] = useState()
+    const [deviceInfor, setDeviceInfor] = useState({name:'Light', curPower:0.6})
 
     const getLightInfor = async() =>{
         try {
@@ -23,7 +19,7 @@ const Light = ({navigation, route}) => {
               method: 'GET',
               headers: {
                 accept: 'application/json',
-                'X-AIO-Key': 'aio_Trhz71ibB4eYM01QlLNEtcZrdjCf' 
+                'X-AIO-Key': 'aio_eGsJ29OtlNTVZwh5RpCNlKFiq1AC' 
               }
             });
       
@@ -34,6 +30,7 @@ const Light = ({navigation, route}) => {
                 const value = parseFloat(result[0].value);
                 if (!isNaN(value)) {
                     setLightInfor(value)
+                    console.log(value)
                 }
               }
             } else {
@@ -46,7 +43,12 @@ const Light = ({navigation, route}) => {
     useEffect(() => {
         getLightInfor()
     }, [])
+
+    useEffect(() => {
+        setDeviceInfor({name:'Light', curPower:lightInfor/500})
+    }, [lightInfor])
     
+
     const deviceMode = [
         {
             name: 'Auto Mode'

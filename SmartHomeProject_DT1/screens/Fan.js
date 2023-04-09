@@ -40,7 +40,7 @@ const Fan = ({navigation, route}) => {
     //     try {
     //         const baseUrl = 'https://io.adafruit.com/api/v2/Huy_Hieu/feeds/';
     //         const dataUrl = '/data?include=value&limit=1';
-    //         const url = `${baseUrl}/cambien2/${dataUrl}`; // Construct the URL
+    //         const url = `${baseUrl}/cambien1/${dataUrl}`; // Construct the URL
       
     //         const response = await fetch(url, {
     //           method: 'GET',

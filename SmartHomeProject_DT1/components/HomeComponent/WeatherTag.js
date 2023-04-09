@@ -11,17 +11,17 @@ const WeatherTag = ({type}) => {
 
     const [temp, setTemp] = useState(60);
     const [humidity, setHumidity] = useState(60);
-    const humi = 50;
+
     useEffect(() => {
-        const timerId = setTimeout(() => {
+          const timerId = setInterval(() => {
             getHumidTemp('cambien1');
-            getHumidTemp('cambien2');
-        }, 10000);
-    
-        return () => {
-            clearTimeout(timerId);
-        };
-    });
+            getHumidTemp('cambien3');
+          },1000);
+          return () => {
+            clearInterval(timerId);
+          };
+    },[]);
+
 
     const getHumidTemp = async (feedKey) => {
         try {
@@ -33,7 +33,7 @@ const WeatherTag = ({type}) => {
               method: 'GET',
               headers: {
                 accept: 'application/json',
-                'X-AIO-Key': 'aio_Trhz71ibB4eYM01QlLNEtcZrdjCf' 
+                'X-AIO-Key': 'aio_eGsJ29OtlNTVZwh5RpCNlKFiq1AC' 
               }
             });
       

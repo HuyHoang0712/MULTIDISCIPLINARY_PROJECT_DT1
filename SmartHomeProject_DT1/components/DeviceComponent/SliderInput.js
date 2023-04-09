@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import Slider from "@react-native-community/slider";
@@ -6,9 +6,16 @@ import Slider from "@react-native-community/slider";
 import { icons, COLORS, } from "../../constants";
 import CustomSlider from "./CustomSlider";
 const SliderInput = ({deviceInfor}) => {
-    let { name, curPower} = deviceInfor;
+    console.log(deviceInfor)
+    let { name} = deviceInfor;
+
+    const [curPower, setCurPower] = useState(deviceInfor.curPower);
+
     const [slideValue, setSlideValue] = useState(curPower);
 
+    useEffect (() => {
+        setCurPower(deviceInfor.curPower)
+    },[deviceInfor.curPower])
 
     return (
         <View style={Styles.container}>
