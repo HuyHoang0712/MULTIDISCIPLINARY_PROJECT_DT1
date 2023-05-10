@@ -4,9 +4,6 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import { Divider } from "@rneui/themed";
 import { COLORS, images } from "../../constants";
 
-
-
-
 const WeatherTag = ({type}) => {
 
     const [temp, setTemp] = useState(60);
