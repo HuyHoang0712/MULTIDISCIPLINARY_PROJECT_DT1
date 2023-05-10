@@ -10,6 +10,12 @@ export const fan = require("../assets/icons/fan.png")
 export const timer = require("../assets/icons/timer.png")
 export const user_profile = require("../assets/icons/user_profile.png")
 export const user_profile_fill = require("../assets/icons/user_profile_fill.png")
+export const key = require("../assets/icons/key.png")
+export const mail = require("../assets/icons/mail.png")
+export const password = require("../assets/icons/password.png")
+export const phone = require("../assets/icons/phone.png")
+export const username = require("../assets/icons/username.png")
+
 
 export default {
     smarthome_icon,
@@ -23,5 +29,11 @@ export default {
     fan,
     timer,
     user_profile,
-    user_profile_fill
+    user_profile_fill,
+
+    key,
+    mail,
+    password,
+    phone,
+    username
 }

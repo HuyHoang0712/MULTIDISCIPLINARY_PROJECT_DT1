@@ -10,18 +10,19 @@ const Home = ({navigation}) => {
 
     const accessPeople = [
         {
+            name: 'Huy Hieu',
             image: images.person1
         },
         {
+            name: 'Viet Thang',
             image: images.person2
         },
         {
+            name: 'Thanh Phuc',
             image: images.person3
         },
         {
-            image: images.person3
-        },
-        {
+            name: 'Huy Hieu',
             image: images.person3
         },
     ]
