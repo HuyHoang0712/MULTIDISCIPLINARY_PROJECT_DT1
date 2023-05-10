@@ -24,7 +24,8 @@ const ModeDevide = ({ modeInfor }) => {
         },
         text: {
             fontFamily: 'Inter-SemiBold',
-            fontSize: 20
+            fontSize: 20,
+            color: isSwitchOn ? COLORS.white : COLORS.black,
         },
         shadow: {
             shadowColor: "#000",
@@ -47,7 +48,7 @@ const ModeDevide = ({ modeInfor }) => {
             <Switch
                 value={isSwitchOn}
                 onValueChange={onToggleSwitch}
-                color={COLORS.primary}
+                color={COLORS.secondary}
                 style={{
                     borderRadius: 15,
                     borderWidth: 2,

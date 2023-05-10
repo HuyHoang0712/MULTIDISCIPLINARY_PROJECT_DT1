@@ -71,7 +71,7 @@ const AdvancedMode = ({ modeInfor }) => {
                 <Switch
                     value={isSwitchOn}
                     onValueChange={onToggleSwitch}
-                    color={COLORS.primary}
+                    color={COLORS.secondary}
                     style={{
                         borderRadius: 15,
                         borderWidth: 2,

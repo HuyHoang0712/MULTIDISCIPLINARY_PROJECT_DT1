@@ -120,10 +120,12 @@ const Styles = StyleSheet.create({
     },
     subcontainer: {
         width: '100%',
+        height: 40,
+        justifyContent: 'center',
     },
     title: {
         width: '100%',
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
     },
     deviceContainer: {
         width: '90%',
@@ -131,10 +133,11 @@ const Styles = StyleSheet.create({
     },
     energyBox: {
         width: '100%',
-        height: 110,
+        height: 130,
         paddingHorizontal: 20,
         justifyContent: 'space-around',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        paddingBottom: 20,
+        backgroundColor: COLORS.secondary,
     },
     box1: {
         flex: 1,

@@ -31,7 +31,7 @@ const Styles = StyleSheet.create({
     text: {
         color: COLORS.black,
         fontFamily: 'Inter-SemiBold',
-        fontSize: 20,
+        fontSize: 25,
         padding: 5,
         borderRadius: 10
     },

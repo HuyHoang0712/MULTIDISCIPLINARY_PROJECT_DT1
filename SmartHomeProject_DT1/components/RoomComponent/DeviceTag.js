@@ -47,6 +47,22 @@ const DeviceTag = ({device, navigation, roomInfor}) => {
         setActive(!active);
     };
 
+    const Styles = StyleSheet.create({
+        container: {
+            width: 150,
+            height: 150,
+            borderRadius: 10,
+            padding: 30,
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            backgroundColor: active? COLORS.primary:COLORS.white
+        },
+        image: {
+            width: 65,
+            height: 65
+        },
+    })
+
     return (
         <Pressable
             onPress={onPressHandler}
@@ -58,12 +74,12 @@ const DeviceTag = ({device, navigation, roomInfor}) => {
                 <Image 
                     source={icon}
                     style={Styles.image}
-                    tintColor={active? COLORS.secondary:COLORS.white}
+                    tintColor={active? COLORS.white:COLORS.primary}
                 />
                 <Text style={{
                     fontFamily: 'Inter-Bold',
                     fontSize: 15,
-                    color: active? COLORS.secondary:COLORS.white
+                    color: active? COLORS.white:COLORS.primary
                 }}>{name}</Text>
             </View>
         </Pressable>
@@ -71,20 +87,6 @@ const DeviceTag = ({device, navigation, roomInfor}) => {
     )
 }
 
-const Styles = StyleSheet.create({
-    container: {
-        width: 150,
-        height: 150,
-        borderRadius: 10,
-        padding: 30,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        backgroundColor: COLORS.primary
-    },
-    image: {
-        width: 65,
-        height: 65
-    },
-})
+
 
 export default DeviceTag;

@@ -22,7 +22,7 @@ const CustomSlider = ({slideValue, setSlideValue}) => {
                 style={{width: '85%', position: 'absolute'}}
                 minimumValue={0}
                 maximumValue={1}
-                value={.5}
+                value={slideValue}
                 onValueChange={(value) => setSlideValue(value)}
                 maximumTrackTintColor='transparent'  
                 minimumTrackTintColor='transparent'

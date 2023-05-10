@@ -70,6 +70,8 @@ const Light = ({navigation, route}) => {
         },
     ]
 
+    let deviceInfor = {name: "Light", curPower: 0.6}
+
     let { roomInfor } = route.params;
     return (
         <View style={Styles.container}>

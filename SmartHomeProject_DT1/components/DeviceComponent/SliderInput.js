@@ -6,7 +6,6 @@ import Slider from "@react-native-community/slider";
 import { icons, COLORS, } from "../../constants";
 import CustomSlider from "./CustomSlider";
 const SliderInput = ({deviceInfor}) => {
-    console.log(deviceInfor)
     let { name} = deviceInfor;
 
     const [curPower, setCurPower] = useState(deviceInfor.curPower);

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { icons, images, COLORS } from "../constants";
 import { WeatherTag, HomeTag, SharedAccessTag, RoomTag } from "../components/HomeComponent"
+import { darkColors } from "@rneui/base";
 
 const Home = ({navigation}) => {
 
@@ -46,6 +47,7 @@ const Home = ({navigation}) => {
 
     return (
         <View style={Styles.container}>
+            <StatusBar barStyle="dark-content" />
             <View style={Styles.tilte}>
                 <Text
                     style={{
@@ -53,7 +55,7 @@ const Home = ({navigation}) => {
                         fontSize: 25,
                         color: COLORS.black
                     }}
-                >Hello Danile!</Text>
+                >Hello Hoang Huy!</Text>
                 <Text
                     style={{
                         fontFamily: 'Inter-Regular',
@@ -89,7 +91,7 @@ const Styles = StyleSheet.create({
 
         backgroundColor: COLORS.light_gray,
 
-        paddingTop: 120,
+        paddingTop: 100,
         paddingBottom:10
     },
     tilte: {

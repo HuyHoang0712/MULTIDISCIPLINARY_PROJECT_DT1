@@ -59,11 +59,11 @@ const WeatherTag = ({type}) => {
         <View style={[Styles[`container${type}`], Styles.shawdowProp]}>
             <View style={Styles.temperature}>
                 <Image source={images.sunny} style={Styles.image}/>
-                <Text style={Styles.text}>{temp}</Text>
+                <Text style={Styles.text}>{temp}ºC</Text>
             </View>
             <Divider orientation="vertical" color={COLORS.black} />
             <View style={Styles.humidity}>
-                <Text style={Styles.text}>{humidity}</Text>
+                <Text style={Styles.text}>{humidity}%</Text>
                 <Text style={Styles.text1}>Humidity</Text>
             </View>
         </View>
@@ -81,7 +81,7 @@ const Styles = StyleSheet.create ({
         paddingLeft: 20,
         borderTopLeftRadius: 10,
         borderBottomLeftRadius: 10,
-        backgroundColor: COLORS.light_gray,
+        backgroundColor: COLORS.secondary,
     },
     containerROOM: {
         width: '80%',
@@ -120,15 +120,15 @@ const Styles = StyleSheet.create ({
         height: 33,
     },
     shawdowProp: {
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
 
-        elevation: 5,
+        // elevation: 5,
     }
 })
 
