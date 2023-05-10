@@ -9,40 +9,39 @@ const DeviceTag = ({device, navigation, roomInfor}) => {
     let { name, icon, feedName, value } = device;
     const [active, setActive] = useState(value == 0? false:true)
 
-    console.log(device)
-    const sendDataToServer = async () => {
+    // const sendDataToServer = async () => {
 
-        const baseUrl = 'https://io.adafruit.com/api/v2/Huy_Hieu/feeds/';
-        const urlServerAPI = `${baseUrl}${feedName}/data`;
+    //     const baseUrl = 'https://io.adafruit.com/api/v2/Huy_Hieu/feeds/';
+    //     const urlServerAPI = `${baseUrl}${feedName}/data`;
 
-        try {
-            const response = await fetch(urlServerAPI, {
-                method: 'POST',
-                headers: {
-                    accept:'application/json',
-                    'X-AIO-Key':'aio_eGsJ29OtlNTVZwh5RpCNlKFiq1AC',
-                    'Content-Type':'application/json'
-                },
-                body: JSON.stringify({value: active? 1: 0}),
-            });
+    //     try {
+    //         const response = await fetch(urlServerAPI, {
+    //             method: 'POST',
+    //             headers: {
+    //                 accept:'application/json',
+    //                 'X-AIO-Key':'aio_eGsJ29OtlNTVZwh5RpCNlKFiq1AC',
+    //                 'Content-Type':'application/json'
+    //             },
+    //             body: JSON.stringify({value: active? 1: 0}),
+    //         });
     
-            if (response.status === 200) {
-                const result = await response.json();
-                console.log(result);
-            } else {
-                // Request failed
-                console.error('Error:', response.status);
-            }
-        } catch (error) {
-            // Catch any other errors
-            console.error('Error:', error);
-        }
-    };
+    //         if (response.status === 200) {
+    //             const result = await response.json();
+    //             console.log(result);
+    //         } else {
+    //             // Request failed
+    //             console.error('Error:', response.status);
+    //         }
+    //     } catch (error) {
+    //         // Catch any other errors
+    //         console.error('Error:', error);
+    //     }
+    // };
     
 
-    useEffect(() => {
-        sendDataToServer()
-    }, [active])
+    // useEffect(() => {
+    //     sendDataToServer()
+    // }, [active])
 
     const onPressHandler = () => {
         setActive(!active);
