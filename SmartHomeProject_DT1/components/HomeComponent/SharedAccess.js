@@ -1,15 +1,19 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Avatar } from 'react-native-paper';
+import { Avatar, IconButton } from 'react-native-paper';
 
-const SharedAccessTag = ({props, navigation, type=false}) => {
-    const {image, name} = props;
+import { icons, COLORS } from "../../constants";
+const SharedAccessTag = ({ props, navigation, type=false, remove = null }) => {
+    const {image, name, id} = props;
 
     return (
         <View style={Styles.container}>
             <Avatar.Image size={type? 35:50} source={image} />
             {type? (
-                <Text style={Styles.text}>{name}</Text>
+                <View style={Styles.subContainer}> 
+                    <Text style={Styles.text}>{name}</Text>
+                    <IconButton icon={icons.remove_person} size={20} iconColor={COLORS.primary} style={{backgroundColor: 'transparent'}} onPress={() => remove(id)}/>
+                </View>
             ):null}
         </View>
     )
@@ -18,9 +22,15 @@ const SharedAccessTag = ({props, navigation, type=false}) => {
 const Styles = StyleSheet.create({
     container: {
         marginHorizontal: 5,
-        alignContent: 'center',
+        alignItems: 'center',
         flexDirection: 'row',
-        marginVertical: 5
+        marginVertical: 5,
+    },
+    subContainer:{
+        width: '90%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
     text: {
         alignSelf: 'center',

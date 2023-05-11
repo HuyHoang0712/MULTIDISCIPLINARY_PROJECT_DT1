@@ -15,6 +15,9 @@ export const mail = require("../assets/icons/mail.png")
 export const password = require("../assets/icons/password.png")
 export const phone = require("../assets/icons/phone.png")
 export const username = require("../assets/icons/username.png")
+export const remove_person = require("../assets/icons/remove_person.png")
+export const add_person = require("../assets/icons/add_person.png")
+export const edit_pen = require("../assets/icons/edit_pen.png")
 
 
 export default {
@@ -35,5 +38,9 @@ export default {
     mail,
     password,
     phone,
-    username
+    username,
+
+    remove_person,
+    add_person,
+    edit_pen
 }
