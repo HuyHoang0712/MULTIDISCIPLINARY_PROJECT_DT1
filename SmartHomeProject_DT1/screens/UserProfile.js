@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
-import { Avatar } from "react-native-paper";
+import { Avatar, Provider } from "react-native-paper";
 import { images, COLORS, icons } from "../constants";
 
-import { InforTag, Title } from "../components/UserProfileComponent";
+import { InforTag, Title, UpdateDialog } from "../components/UserProfileComponent";
 import { SharedAccessTag } from "../components/HomeComponent";
 const UserInfor = {
     id: '01234',
@@ -38,11 +38,15 @@ const sharedPeople = [
     },
 ]
 
-const UserProfile = ({navigation, route}) => {
+const UserProfile = ({ navigation, route }) => {
     const [accessPeople, setAccessPeople] = useState(sharedPeople);
+    const [updatePassword, setUpdatePassword] = useState(false);
+    const [updatePhone, setUpdatePhone] = useState(false);
+    const [updateEmail, setUpdateEmail] = useState(false);
+    const [updateDoor, setUpdateDoor] = useState(false);
 
     const addAccess = () => {
-        
+
     }
 
     const onUpdateDoorPass = () => {
@@ -62,7 +66,7 @@ const UserProfile = ({navigation, route}) => {
     }
 
     const removePeople = (id) => {
-        let tmpList = accessPeople.filter(item => item.id !== id )
+        let tmpList = accessPeople.filter(item => item.id !== id)
         setAccessPeople(tmpList);
     };
 
@@ -71,53 +75,60 @@ const UserProfile = ({navigation, route}) => {
     };
 
     return (
-        <View style={Styles.container}>
-            <View style={Styles.header}>
-                <Text style={{ alignSelf: 'center', fontFamily: 'Inter-ExtraBold', fontSize: 20, color: COLORS.primary }}>My Profile</Text>
-                <View style={Styles.subHeader}>
-                    <Avatar.Image source={UserInfor.image} size={100}/>
-                    <View style={Styles.headerInfor}>
-                        <Text style={{ fontFamily: 'Inter-SemiBold', fontSize: 20 }}>{UserInfor.name}</Text>
-                        <Text style={{ fontFamily:'Inter-Regular',fontSize: 15 }}>#{UserInfor.id}</Text>
+        <Provider>
+            <View style={Styles.container}>
+                <View style={Styles.header}>
+                    <Text style={{ alignSelf: 'center', fontFamily: 'Inter-ExtraBold', fontSize: 20, color: COLORS.primary }}>My Profile</Text>
+                    <View style={Styles.subHeader}>
+                        <Avatar.Image source={UserInfor.image} size={100} />
+                        <View style={Styles.headerInfor}>
+                            <Text style={{ fontFamily: 'Inter-SemiBold', fontSize: 20 }}>{UserInfor.name}</Text>
+                            <Text style={{ fontFamily: 'Inter-Regular', fontSize: 15 }}>#{UserInfor.id}</Text>
+                        </View>
                     </View>
                 </View>
+                <ScrollView style={Styles.content} showsVerticalScrollIndicator={false}>
+                    {/* Personal Information */}
+                    <View style={Styles.personalInfor}>
+                        <Title title='Personal Information' />
+                        <View style={Styles.contentInfor}>
+                            <InforTag icon={icons.username} title='Username' text={UserInfor.username} editInfor={null} />
+                            <InforTag icon={icons.key} title='Password' text={UserInfor.password} funcIcon={icons.edit_pen} openDialog={setUpdatePassword}/>
+                            <InforTag icon={icons.phone} title='Phone' text={UserInfor.phone} funcIcon={icons.edit_pen} openDialog={setUpdatePhone}/>
+                            <InforTag icon={icons.mail} title='Email' text={UserInfor.email} funcIcon={icons.edit_pen} openDialog={setUpdateEmail}/>
+                        </View>
+                    </View>
+
+                    {/* Auto Door */}
+                    <View style={Styles.autoDoor}>
+                        <Text style={Styles.contentTitle}>Auto Door</Text>
+                        <View style={Styles.contentInfor_2}>
+                            <InforTag icon={icons.password} title='Password' text='0712' funcIcon={icons.edit_pen} openDialog={setUpdateDoor}/>
+                        </View>
+                    </View>
+
+                    {/* Shared Access */}
+                    <View style={Styles.sharedAccess}>
+                        <Title title='Manage Shared Access' icon={icons.add_person} func={addAccess} />
+                        <ScrollView style={Styles.contentInfor_1} showsVerticalScrollIndicator={false}>
+                            {accessPeople.map((people, index) => {
+                                return <SharedAccessTag key={index} props={people} type={true} remove={removePeople} />
+                            })}
+                        </ScrollView>
+                    </View>
+
+                    {/* Logout */}
+                    <Pressable onPress={() => logout()} style={Styles.logout}>
+                        <Text style={{ alignSelf: 'center', fontFamily: 'Inter-SemiBold', fontSize: 16, color: COLORS.white }}>Log out</Text>
+                    </Pressable>
+                </ScrollView>
             </View>
-            <ScrollView style={Styles.content} showsVerticalScrollIndicator={false}>
-                {/* Personal Information */}
-                <View style={Styles.personalInfor}>
-                    <Title title='Personal Information'/>
-                    <View style={Styles.contentInfor}>
-                        <InforTag icon={icons.username} title='Username' text={UserInfor.username} editInfor={null}/>
-                        <InforTag icon={icons.key} title='Password' text={UserInfor.password} funcIcon={icons.edit_pen} editInfor={onUpdatePassword}/>
-                        <InforTag icon={icons.phone} title='Phone' text={UserInfor.phone} funcIcon={icons.edit_pen} editInfor={onUpdatePhone}/>
-                        <InforTag icon={icons.mail} title='Email' text={UserInfor.email} funcIcon={icons.edit_pen} editInfor={onUpdateEmail}/>
-                    </View>
-                </View>
+            <UpdateDialog title="Change Password" visible={updatePassword} setVisible={setUpdatePassword} onSubmit={onUpdatePassword}/>
+            <UpdateDialog title="Update Phone Number" visible={updatePhone} setVisible={setUpdatePhone} onSubmit={onUpdatePhone}/>
+            <UpdateDialog title="Update Email" visible={updateEmail} setVisible={setUpdateEmail} onSubmit={onUpdateEmail}/>
+            <UpdateDialog title="Update AutoDoor's Password" visible={updateDoor} setVisible={setUpdateDoor} onSubmit={onUpdateDoorPass}/>
+        </Provider>
 
-                {/* Auto Door */}
-                <View style={Styles.autoDoor}>
-                    <Text style={Styles.contentTitle}>Auto Door</Text>
-                    <View style={Styles.contentInfor_2}>
-                        <InforTag icon={icons.password} title='Password' text='0712' funcIcon={icons.edit_pen} editInfor={onUpdateDoorPass} />
-                    </View>
-                </View>
-
-                {/* Shared Access */}
-                <View style={Styles.sharedAccess}>
-                    <Title title='Manage Shared Access' icon={icons.add_person} func={addAccess}/>
-                    <ScrollView style={Styles.contentInfor_1} showsVerticalScrollIndicator={false}>
-                        {accessPeople.map((people, index) => {
-                            return <SharedAccessTag key={index} props={people} type={true} remove={removePeople}/>
-                        })}
-                    </ScrollView>
-                </View>
-
-                {/* Logout */}
-                <Pressable onPress={()=>logout()} style={Styles.logout}>
-                    <Text style={{ alignSelf: 'center',fontFamily: 'Inter-SemiBold',fontSize: 16,color: COLORS.white }}>Log out</Text>
-                </Pressable>
-            </ScrollView>
-        </View>
     )
 }
 
