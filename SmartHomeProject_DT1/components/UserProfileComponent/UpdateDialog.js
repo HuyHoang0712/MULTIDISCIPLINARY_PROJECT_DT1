@@ -11,7 +11,6 @@ const UpdateDialog = ({ title, visible, setVisible, onSubmit }) => {
 
     let label = title.split(" ");
     label = label[label.length - 1];
-    console.log(label);
 
     const hideDialog = () => {
         setVisible(false);
@@ -42,7 +41,7 @@ const UpdateDialog = ({ title, visible, setVisible, onSubmit }) => {
                     ) : null}
                 </Dialog.Content>
                 <Dialog.Actions>
-                    <Button >Comfirm</Button>
+                    <Button onPress={() => {label === "Password"? onSubmit(newValue, confirmPass):onSubmit(newValue4)}}>Comfirm</Button>
                     <Button onPress={() => hideDialog()} >Cancel</Button>
                 </Dialog.Actions>
             </Dialog>

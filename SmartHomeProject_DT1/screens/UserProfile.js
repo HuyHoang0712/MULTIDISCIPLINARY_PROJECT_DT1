@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Pressable, Alert } from "react-native";
 import { Avatar, Provider } from "react-native-paper";
 import { images, COLORS, icons } from "../constants";
 
@@ -46,22 +46,44 @@ const UserProfile = ({ navigation, route }) => {
     const [updateDoor, setUpdateDoor] = useState(false);
 
     const addAccess = () => {
+        
+    }
+
+    const onUpdateDoorPass = (newPass, confirmPass) => {
+        if (newPass !== confirmPass) {
+            Alert.alert(
+                "Password and Confirm Password are different!",
+                "Please try again!",
+                [
+                    {text: "OK"}
+                ]
+            )
+        }
+        else {
+            setUpdateDoor(false);
+        }
+    }
+
+    const onUpdatePassword = (newPass, confirmPass) => {
+        if (newPass !== confirmPass) {
+            Alert.alert(
+                "Password and Confirm Password are different!",
+                "Please try again!",
+                [
+                    {text: "OK"}
+                ]
+            )
+        }
+        else {
+            setUpdatePassword(false);
+        }
+    }
+
+    const onUpdatePhone = (newPhone) => {
 
     }
 
-    const onUpdateDoorPass = () => {
-
-    }
-
-    const onUpdatePassword = () => {
-
-    }
-
-    const onUpdatePhone = () => {
-
-    }
-
-    const onUpdateEmail = () => {
+    const onUpdateEmail = (newEmail) => {
 
     }
 
