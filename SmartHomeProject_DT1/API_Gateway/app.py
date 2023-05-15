@@ -18,10 +18,12 @@ def postuser():
 @app.route('/light', methods=['POST'])
 def turnOn():
     aio = aio_db.get_aio()
-    data = 1
-    test_btn = aio.feeds('BBC_LED')
-    aio.send_data(test_btn.key, data)
-    return "<p>hello</>"
+    data = {"value": 1}
+    test_btn = aio.feeds('bbc-led')
+    aio.send_data(test_btn.key, '1')
+    print(test_btn)
+    
+    return "<p>hello</p>"
     
 
 if __name__ == "__main__":
