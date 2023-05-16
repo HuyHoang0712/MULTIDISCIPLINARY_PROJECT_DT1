@@ -6,10 +6,4 @@ def get_database():
     
     client = MongoClient(URI)
     
-    try:
-        client.ping.command('ping')
-        print("Pinged your deployment. You successfully connected to MongoDB!")
-    except Exception as e:
-        print(e)
-        
     return client['DT1_API']

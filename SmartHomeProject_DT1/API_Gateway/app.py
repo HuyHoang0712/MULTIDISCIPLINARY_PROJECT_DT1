@@ -1,11 +1,28 @@
 from flask import Flask
+from flask.json import JSONEncoder
+from bson import ObjectId
+from datetime import datetime, date
+
 from Database import user_db, aio_db
+
+from controllers.userController import user_bp
+
+class MongoJSONEncoder(JSONEncoder):
+    def default(self, o):
+        if isinstance(o, (datetime, date)):
+            return iso.datetime_isoformat(o)
+        if isinstance(o, ObjectId):
+            return str(o)
+        else:
+            return super().default(o)
 
 # Setup Serverr
 HOST = '0.0.0.0'
-PORT = 8000
+PORT = 8080
 
 app = Flask(__name__)
+app.json_encoder = MongoJSONEncoder
+app.register_blueprint(user_bp)
 
 @app.route('/', methods=['POST'])
 def postuser():

@@ -37,5 +37,6 @@
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
+  "proxy": "https://3681-125-235-239-130.ngrok-free.app",
   "private": true
 }

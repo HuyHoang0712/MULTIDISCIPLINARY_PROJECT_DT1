@@ -5,56 +5,52 @@ import { CustomInput, CustomButton } from "../components";
 import { icons, FONTS, COLORS } from "../constants";
 
 const Login = () => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const navigation = useNavigation();
 
-    const onSignInPressed = (email, password) => {
-    //     if (email === '' || password === '') {
-    //         Alert.alert(
-    //             "Error!",
-    //             "Please enter username and password!",
-    //             [
-    //                 { text: "OK" }
-    //             ]
-    //         );
-    //     }
-    //     else {
-    //         // console.log(email, password)
-    //         fetch(HOST + "/api/customer/login", {
-    //             method: 'POST',
-    //             headers: {
-    //                 Accept: 'application/json',
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify({
-    //                 email: email,
-    //                 password: password,
-    //             }),
-    //         })
-    //             .then(response => response.json())
-    //             .then(accountInfo => {
-    //                 console.log(accountInfo);
-    //                 if (accountInfo.length === 0) {
-    //                     Alert.alert(
-    //                         "Error!",
-    //                         "Invalid email or password!",
-    //                         [
-    //                             { text: "OK" }
-    //                         ]
-    //                     );
-    //                 }
-    //                 else {
-    //                     navigation.navigate("Home", { accountInfo: accountInfo[0] })
-    //                 };
-    //                 return accountInfo;
-    //             })
-    //             .catch(error => {
-    //                 console.error(error);
-    //             });
-    //     }
-        navigation.navigate("Main")
+    const onSignInPressed = (username, password) => {
+        if (username === '' || password === '') {
+            Alert.alert(
+                "Error!",
+                "Please enter username and password!",
+                [
+                    { text: "OK" }
+                ]
+            );
+        }
+        else {
+            fetch("https://3681-125-235-239-130.ngrok-free.app/user/login", {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                }),
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        let accountInfo = response.json()
+                        navigation.navigate("Main", { accountInfo: accountInfo[0] })
+                    }
+                    else {
+                        let error = response.json()
+                        Alert.alert(
+                            error,
+                            [
+                                { text: "OK" }
+                            ]
+                        );
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
     };
     const onForgotPasswordPressed = () => {
         navigation.navigate("ForgotPassword")
@@ -96,10 +92,10 @@ const Login = () => {
                         }}
                 >Sign In
                 </Text>
-                <CustomInput placeholder="Your Email" value={email} setValue={setEmail} />
+                <CustomInput placeholder="Your Username" value={username} setValue={setUsername} />
                 <CustomInput placeholder="Your Password" value={password} setValue={setPassword} secure={true} />
                 <CustomButton text="Forgot Password?" onPress={onForgotPasswordPressed} type="FOTGOTPASS" />
-                <CustomButton text="Sign In" onPress={() => onSignInPressed(email, password)} />
+                <CustomButton text="Sign In" onPress={() => onSignInPressed(username, password)} />
             </View>
             
         </View>
