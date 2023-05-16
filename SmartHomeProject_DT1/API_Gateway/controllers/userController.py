@@ -7,10 +7,10 @@ db = user_db.get_database()['user']
 
 user_bp = Blueprint('user', __name__, url_prefix='/user')
 
-@user_bp.route('/', methods=['GET'])
+@user_bp.route('/', methods=['POST'])
 def test():
-    post = {"username": "hoanghuy", "password": "1234"}
-    db.insert_one(post)
+    user = request.get_json()
+    db.insert_one(user)
     return jsonify("Added")
 
 @user_bp.route('/login', methods=['POST'])

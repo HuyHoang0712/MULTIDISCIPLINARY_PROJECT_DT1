@@ -33,14 +33,14 @@ const Login = () => {
                 })
             })
             result = await response.json();
-            console.log(typeof(result));
-            console.log(response.status);
             if (response.status === 200) {
                 navigation.navigate('Main', {accountInfor: result});
             }
             else {
                 Alert.alert(
+                    "Error!",
                     result,
+                    "Please try again!",
                     [
                         { text: "OK" }
                     ]

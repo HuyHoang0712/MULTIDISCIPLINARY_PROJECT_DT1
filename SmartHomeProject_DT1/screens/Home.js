@@ -6,8 +6,9 @@ import { icons, images, COLORS } from "../constants";
 import { WeatherTag, HomeTag, SharedAccessTag, RoomTag } from "../components/HomeComponent"
 import { darkColors } from "@rneui/base";
 
-const Home = ({navigation}) => {
+const Home = ({navigation, route}) => {
 
+    const { accountInfor } = route.params;
     const accessPeople = [
         {
             name: 'Huy Hieu',
@@ -56,7 +57,7 @@ const Home = ({navigation}) => {
                         fontSize: 25,
                         color: COLORS.black
                     }}
-                >Hello Hoang Huy!</Text>
+                >Hello {accountInfor.name}!</Text>
                 <Text
                     style={{
                         fontFamily: 'Inter-Regular',

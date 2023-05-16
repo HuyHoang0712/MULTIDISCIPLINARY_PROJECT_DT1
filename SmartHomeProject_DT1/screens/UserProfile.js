@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView, Pressable, Alert } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Pressable, Alert, Image } from "react-native";
 import { Avatar, Provider } from "react-native-paper";
 import { images, COLORS, icons } from "../constants";
 
@@ -33,12 +33,13 @@ const sharedPeople = [
     },
     {
         id: 3,
-        name: 'Huy Hieu',
+        name: 'Kiet Huynh',
         image: images.person3
     },
 ]
 
 const UserProfile = ({ navigation, route }) => {
+    const { accountInfor } = route.params;
     const [accessPeople, setAccessPeople] = useState(sharedPeople);
     const [updatePassword, setUpdatePassword] = useState(false);
     const [updatePhone, setUpdatePhone] = useState(false);
@@ -102,10 +103,10 @@ const UserProfile = ({ navigation, route }) => {
                 <View style={Styles.header}>
                     <Text style={{ alignSelf: 'center', fontFamily: 'Inter-ExtraBold', fontSize: 20, color: COLORS.primary }}>My Profile</Text>
                     <View style={Styles.subHeader}>
-                        <Avatar.Image source={UserInfor.image} size={100} />
+                        <Avatar.Image source={{uri:accountInfor.image}} size={100} />
                         <View style={Styles.headerInfor}>
-                            <Text style={{ fontFamily: 'Inter-SemiBold', fontSize: 20 }}>{UserInfor.name}</Text>
-                            <Text style={{ fontFamily: 'Inter-Regular', fontSize: 15 }}>#{UserInfor.id}</Text>
+                            <Text style={{ fontFamily: 'Inter-SemiBold', fontSize: 20 }}>{accountInfor.name}</Text>
+                            <Text style={{ fontFamily: 'Inter-Regular', fontSize: 15 }}>#{accountInfor._id.substr(-6, 6)}</Text>
                         </View>
                     </View>
                 </View>
@@ -114,10 +115,10 @@ const UserProfile = ({ navigation, route }) => {
                     <View style={Styles.personalInfor}>
                         <Title title='Personal Information' />
                         <View style={Styles.contentInfor}>
-                            <InforTag icon={icons.username} title='Username' text={UserInfor.username} editInfor={null} />
-                            <InforTag icon={icons.key} title='Password' text={UserInfor.password} funcIcon={icons.edit_pen} openDialog={setUpdatePassword}/>
-                            <InforTag icon={icons.phone} title='Phone' text={UserInfor.phone} funcIcon={icons.edit_pen} openDialog={setUpdatePhone}/>
-                            <InforTag icon={icons.mail} title='Email' text={UserInfor.email} funcIcon={icons.edit_pen} openDialog={setUpdateEmail}/>
+                            <InforTag icon={icons.username} title='Username' text={accountInfor.username} editInfor={null} />
+                            <InforTag icon={icons.key} title='Password' text={accountInfor.password} funcIcon={icons.edit_pen} openDialog={setUpdatePassword}/>
+                            <InforTag icon={icons.phone} title='Phone' text={accountInfor.phone} funcIcon={icons.edit_pen} openDialog={setUpdatePhone}/>
+                            <InforTag icon={icons.mail} title='Email' text={accountInfor.email} funcIcon={icons.edit_pen} openDialog={setUpdateEmail}/>
                         </View>
                     </View>
 
