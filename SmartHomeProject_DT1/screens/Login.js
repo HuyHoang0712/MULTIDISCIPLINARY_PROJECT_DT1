@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { CustomInput, CustomButton } from "../components";
-import { icons, FONTS, COLORS } from "../constants";
+import { icons, FONTS, COLORS, HOST } from "../constants";
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -10,7 +10,7 @@ const Login = () => {
 
     const navigation = useNavigation();
 
-    const onSignInPressed = (username, password) => {
+    const onSignInPressed = async (username, password) => {
         if (username === '' || password === '') {
             Alert.alert(
                 "Error!",
@@ -20,8 +20,8 @@ const Login = () => {
                 ]
             );
         }
-        else {
-            fetch("https://3681-125-235-239-130.ngrok-free.app/user/login", {
+        try {
+            const response = await fetch(HOST + "/user/login", {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -30,66 +30,66 @@ const Login = () => {
                 body: JSON.stringify({
                     username: username,
                     password: password,
-                }),
-            })
-                .then(response => {
-                    if (response.status === 200) {
-                        let accountInfo = response.json()
-                        navigation.navigate("Main", { accountInfo: accountInfo[0] })
-                    }
-                    else {
-                        let error = response.json()
-                        Alert.alert(
-                            error,
-                            [
-                                { text: "OK" }
-                            ]
-                        );
-                    }
                 })
-                .catch(error => {
-                    console.error(error);
-                });
+            })
+            result = await response.json();
+            console.log(typeof(result));
+            console.log(response.status);
+            if (response.status === 200) {
+                navigation.navigate('Main', {accountInfor: result});
+            }
+            else {
+                Alert.alert(
+                    result,
+                    [
+                        { text: "OK" }
+                    ]
+                );
+            }
+        } catch (error) {
+            console.error(error);
         }
+            
     };
+
     const onForgotPasswordPressed = () => {
         navigation.navigate("ForgotPassword")
     };
     return (
         <View style={Styles.container}>
             <View style={Styles.title}>
-                 <Image style={Styles.logo} source={icons.smarthome_icon} tintColor={COLORS.primary}/>
+                <Image style={Styles.logo} source={icons.smarthome_icon} tintColor={COLORS.primary} />
                 <View style={Styles.title1}>
                     <Text
-                    style={{
-                        flex: 2,
-                        fontFamily: 'Inter-Black',
-                        fontSize: 35,
-                        color: COLORS.primary,
-                        opacity: 0.85,
-                    }}
+                        style={{
+                            flex: 2,
+                            fontFamily: 'Inter-Black',
+                            fontSize: 35,
+                            color: COLORS.primary,
+                            opacity: 0.85,
+                        }}
                     >Smart Home
                     </Text>
                     <Text
-                    style={{
-                        flex: 1,
-                        fontFamily: 'Inter-Regular',
-                        fontSize: 15,
-                        color: COLORS.black,
-                        opacity: 0.85,
-                    }}
+                        style={{
+                            flex: 1,
+                            fontFamily: 'Inter-Regular',
+                            fontSize: 15,
+                            color: COLORS.black,
+                            opacity: 0.85,
+                        }}
                     >Multidiscliplinary Project DT1</Text>
                 </View>
-                
+
             </View>
             <View style={Styles.loginpart}>
                 <Text
                     style={{
-                            fontFamily: 'Inter-Medium',
-                            fontSize: 40,
-                            color: COLORS.black,
-                            opacity: 0.85,
-                        }}
+                        fontFamily: 'Inter-Medium',
+                        fontSize: 40,
+                        color: COLORS.black,
+                        opacity: 0.85,
+                    }}
                 >Sign In
                 </Text>
                 <CustomInput placeholder="Your Username" value={username} setValue={setUsername} />
@@ -97,7 +97,7 @@ const Login = () => {
                 <CustomButton text="Forgot Password?" onPress={onForgotPasswordPressed} type="FOTGOTPASS" />
                 <CustomButton text="Sign In" onPress={() => onSignInPressed(username, password)} />
             </View>
-            
+
         </View>
     );
 };
