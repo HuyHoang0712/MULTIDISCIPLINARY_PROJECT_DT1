@@ -19,37 +19,39 @@ const Login = () => {
                     { text: "OK" }
                 ]
             );
+        } else {
+            try {
+                const response = await fetch(HOST + "/user/login", {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                    })
+                });
+                let result = await response.json();
+                console.log(result);
+                if (response.status === 200) {
+                    navigation.navigate('Main', { accountInfor: result });
+                } 
+                else {{
+                    Alert.alert(
+                        "Error!",
+                        result + '\nPlease try again!',
+                        [
+                            { text: "OK" }
+                        ]
+                    );
+                }}
+            } catch (error) {
+                console.error(error);
+            };
         }
-        try {
-            const response = await fetch(HOST + "/user/login", {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: username,
-                    password: password,
-                })
-            })
-            result = await response.json();
-            if (response.status === 200) {
-                navigation.navigate('Main', {accountInfor: result});
-            }
-            else {
-                Alert.alert(
-                    "Error!",
-                    result,
-                    "Please try again!",
-                    [
-                        { text: "OK" }
-                    ]
-                );
-            }
-        } catch (error) {
-            console.error(error);
-        }
-            
+
+
     };
 
     const onForgotPasswordPressed = () => {

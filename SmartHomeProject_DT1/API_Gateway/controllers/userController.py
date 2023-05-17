@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-import json
+from bson import ObjectId
 from Database import user_db
 
 
@@ -24,3 +24,24 @@ def login():
     
     else:
         return jsonify(user)
+    
+@user_bp.route('/update-password/<id>', methods=['POST'])
+def updatePassword(id):
+    body = request.get_json()
+    user = db.find_one_and_update({"_id": ObjectId(id)},{"$set": {"password": body["newPassword"]}})
+    user = db.find_one({"_id": ObjectId(id)})
+    return jsonify(user)
+
+@user_bp.route('/update-phone/<id>', methods=['POST'])
+def updatePhone(id):
+    body = request.get_json()
+    user = db.find_one_and_update({"_id": ObjectId(id)},{"$set": {"phone": body["cvnewPhone"]}})
+    user = db.find_one({"_id": ObjectId(id)})
+    return jsonify(user)
+
+@user_bp.route('/update-email/<id>', methods=['POST'])
+def updateEmail(id):
+    body = request.get_json()
+    user = db.find_one_and_update({"_id": ObjectId(id)},{"$set": {"email": body["newEmail"]}})
+    user = db.find_one({"_id": ObjectId(id)})
+    return jsonify(user)

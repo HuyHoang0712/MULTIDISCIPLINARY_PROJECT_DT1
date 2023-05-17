@@ -1,19 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, ScrollView, Pressable, Alert, Image } from "react-native";
 import { Avatar, Provider } from "react-native-paper";
-import { images, COLORS, icons } from "../constants";
+import { images, COLORS, icons, HOST } from "../constants";
 
 import { InforTag, Title, UpdateDialog } from "../components/UserProfileComponent";
 import { SharedAccessTag } from "../components/HomeComponent";
-const UserInfor = {
-    id: '01234',
-    name: 'Hoang Huy',
-    phone: '0917263404',
-    email: 'huy.hoang0712@hcmut.edu.vn',
-    username: 'huyhoang',
-    password: '123',
-    image: images.person1
-}
 
 const sharedPeople = [
     {
@@ -39,7 +30,7 @@ const sharedPeople = [
 ]
 
 const UserProfile = ({ navigation, route }) => {
-    const { accountInfor } = route.params;
+    const [accountInfor, setAccountInfor ]= useState(route.params.accountInfor);
     const [accessPeople, setAccessPeople] = useState(sharedPeople);
     const [updatePassword, setUpdatePassword] = useState(false);
     const [updatePhone, setUpdatePhone] = useState(false);
@@ -50,7 +41,7 @@ const UserProfile = ({ navigation, route }) => {
         
     }
 
-    const onUpdateDoorPass = (newPass, confirmPass) => {
+    const onUpdateDoorPass =  (newPass, confirmPass) => {
         if (newPass !== confirmPass) {
             Alert.alert(
                 "Password and Confirm Password are different!",
@@ -61,11 +52,12 @@ const UserProfile = ({ navigation, route }) => {
             )
         }
         else {
+
             setUpdateDoor(false);
         }
     }
 
-    const onUpdatePassword = (newPass, confirmPass) => {
+    const onUpdatePassword = async (newPass, confirmPass) => {
         if (newPass !== confirmPass) {
             Alert.alert(
                 "Password and Confirm Password are different!",
@@ -75,9 +67,33 @@ const UserProfile = ({ navigation, route }) => {
                 ]
             )
         }
-        else {
+        try {
+            const response = await fetch(HOST + `/user/update-password/${accountInfor._id}`, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    newPassword: newPass
+                })
+            })
+
+            let result = await response.json()
+            setAccountInfor(result);
             setUpdatePassword(false);
+            Alert.alert(
+                "Update Successfully!",
+                "",
+                [
+                    {text: "OK"}
+                ]
+            )
+        } catch (error) { 
+            console.error(error);
         }
+            
+        
     }
 
     const onUpdatePhone = (newPhone) => {
