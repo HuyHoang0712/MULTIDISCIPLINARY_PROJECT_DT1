@@ -35,7 +35,7 @@ def updatePassword(id):
 @user_bp.route('/update-phone/<id>', methods=['POST'])
 def updatePhone(id):
     body = request.get_json()
-    user = db.find_one_and_update({"_id": ObjectId(id)},{"$set": {"phone": body["cvnewPhone"]}})
+    user = db.find_one_and_update({"_id": ObjectId(id)},{"$set": {"phone": body["newPhone"]}})
     user = db.find_one({"_id": ObjectId(id)})
     return jsonify(user)
 

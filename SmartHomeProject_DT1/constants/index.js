@@ -1,7 +1,7 @@
 import icons from "./icons";
 import images from "./images";
 import { COLORS, SIZES, FONTS } from "./theme";
-const HOST = "https://98e8-125-235-239-130.ngrok-free.app"
+const HOST = "https://1781-116-110-43-226.ngrok-free.app"
 
 export {
     images,

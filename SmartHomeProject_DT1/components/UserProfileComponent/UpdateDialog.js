@@ -41,7 +41,10 @@ const UpdateDialog = ({ title, visible, setVisible, onSubmit }) => {
                     ) : null}
                 </Dialog.Content>
                 <Dialog.Actions>
-                    <Button onPress={() => {label === "Password"? onSubmit(newValue, confirmPass):onSubmit(newValue4)}}>Comfirm</Button>
+                    <Button onPress={() => {
+                        label === "Password"? onSubmit(newValue, confirmPass):onSubmit(newValue);
+                        setNewValue("");
+                    }}>Comfirm</Button>
                     <Button onPress={() => hideDialog()} >Cancel</Button>
                 </Dialog.Actions>
             </Dialog>
