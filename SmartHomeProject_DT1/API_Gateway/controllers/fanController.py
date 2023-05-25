@@ -5,6 +5,7 @@ import sys
 
 fan_control = Blueprint('fan', __name__, url_prefix='/fan')
 FEED_ID = "bbc-led"
+AUTO_FEED = "bbc-auto"
 aio_client = get_aio()
 
 @fan_controll.route('/get_status', methods=['GET'])
