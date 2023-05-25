@@ -7,6 +7,7 @@ from Database import user_db, aio_db
 
 from controllers.userController import user_bp
 from controllers.temp_humidController import temp_bp, humid_bp
+from controllers.fanController import fan_controll
 
 class MongoJSONEncoder(JSONEncoder):
     def default(self, o):
@@ -26,6 +27,7 @@ app.json_encoder = MongoJSONEncoder
 app.register_blueprint(user_bp)
 app.register_blueprint(temp_bp)
 app.register_blueprint(humid_bp)
+app.register_blueprint(fan_controll)
 
 # @app.route('/', methods=['POST'])
 # def postuser():
