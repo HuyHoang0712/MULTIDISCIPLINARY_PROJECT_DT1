@@ -4,7 +4,7 @@ from Database.aio_db import get_aio
 import sys
 
 fan_control = Blueprint('fan', __name__, url_prefix='/fan')
-FEED_ID = "bbc-led"
+FEED_ID = "bbc-fan"
 AUTO_FEED = "bbc-auto"
 aio_client = get_aio()
 
