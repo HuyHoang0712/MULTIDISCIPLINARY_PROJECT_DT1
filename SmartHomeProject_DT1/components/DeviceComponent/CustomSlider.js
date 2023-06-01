@@ -23,6 +23,7 @@ const CustomSlider = ({slideValue, setSlideValue}) => {
                 minimumValue={0}
                 maximumValue={1}
                 value={slideValue}
+                step={25}
                 onValueChange={(value) => setSlideValue(value)}
                 maximumTrackTintColor='transparent'  
                 minimumTrackTintColor='transparent'

@@ -1,22 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Image, StyleSheet, Text, ScrollView } from "react-native";
 
-import { HeaderDevice, SliderInput, ModeDevide, AdvancedMode } from "../components/DeviceComponent";
-import { images, icons, COLORS } from "../constants";
+import { HeaderDevice, SliderInput, ModeDevide, AdvancedMode, FanPower } from "../components/DeviceComponent";
+import { images, icons, COLORS, HOST } from "../constants";
 
 const Fan = ({navigation, route}) => {
 
+    let { roomInfor, setActive } = route.params;
     const deviceInfor = {
         name: 'Fan',
         curPower: 0.8
     }
 
+    const [autoMode, setAutoMode] = useState(0);
+    const [savePower, setSavePower] = useState(0);
+
+    useEffect(() => {
+        const getStatus = async (mode) => {
+            try {
+                const response = await fetch(HOST + `/fan/${mode}`, {
+                    method: 'GET',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                });
+                let result = await response.json();
+                setAutoMode(parseInt(result));
+                
+            } catch (error) {  
+                console.error(error);
+                return 0;
+            }
+        };
+        getStatus('auto_mode');
+    }, []);
+
+    const controlAutoMode = async () => {
+        setAutoMode(autoMode == 0 ? 1 : 0)
+        try {
+            const response = await fetch(HOST + '/fan/handle_autoMode', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    data: autoMode === 0 ? '1' : '0'
+                })
+            })
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+
     const deviceMode = [
         {
-            name: 'Auto Mode'
+            name: 'Auto Mode',
+            active: autoMode,
+            setActive: controlAutoMode,
         },
         {
-            name: 'Saving Energy Mode'
+            name: 'Saving Energy Mode',
+            active: savePower,
+            setActive: null,
         },
     ]
 
@@ -33,48 +81,11 @@ const Fan = ({navigation, route}) => {
         },
     ]
 
-
-    // const [fanInfor, setFanInfor] = useState()
-
-    // const getFanInfor = async() =>{
-    //     try {
-    //         const baseUrl = 'https://io.adafruit.com/api/v2/Huy_Hieu/feeds/';
-    //         const dataUrl = '/data?include=value&limit=1';
-    //         const url = `${baseUrl}/cambien1/${dataUrl}`; // Construct the URL
-      
-    //         const response = await fetch(url, {
-    //           method: 'GET',
-    //           headers: {
-    //             accept: 'application/json',
-    //             'X-AIO-Key': 'aio_Trhz71ibB4eYM01QlLNEtcZrdjCf' 
-    //           }
-    //         });
-      
-    //         if (response.status === 200) {
-    //           const result = await response.json();
-
-    //           if (result && result.length > 0) {
-    //             const value = parseFloat(result[0].value);
-    //             if (!isNaN(value)) {
-    //                 setFanInfor(value)
-    //             }
-    //           }
-    //         } else {
-    //           console.error('Error:', response.status);
-    //         }
-    //       } catch (error) {
-    //         console.error('Error:', error);
-    //       }
-    // }
-    // useEffect(() => {
-    //     getFanInfor()
-    // }, [])
-
-    let { roomInfor } = route.params;
+    
     return (
         <View style={Styles.container}>
             <HeaderDevice navigation={navigation} roomInfor={roomInfor} type="Fan"/>
-            <SliderInput deviceInfor={deviceInfor}/>
+            <FanPower setActive={setActive}/>
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ alignItems: 'center'}}

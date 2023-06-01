@@ -50,7 +50,7 @@ const DeviceTag = ({ device, navigation, roomInfor, active=0, setActive=null}) =
         <Pressable
             onPress={controlDevice}
             onLongPress={() => {
-                navigation.navigate(name, { roomInfor: roomInfor })
+                navigation.navigate(name, { roomInfor: roomInfor, setActive: setActive })
             }}
         >
             <View style={Styles.container}>

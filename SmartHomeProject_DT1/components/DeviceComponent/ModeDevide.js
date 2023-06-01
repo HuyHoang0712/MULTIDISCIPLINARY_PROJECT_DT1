@@ -7,7 +7,7 @@ import { COLORS } from "../../constants";
 
 const ModeDevide = ({ modeInfor }) => {
     let { name, active, setActive } = modeInfor;
-    const onToggleSwitch = () => setActive(active == 0 ? 1 : 0);
+    const onToggleSwitch = () => setActive();
 
     const Styles = StyleSheet.create({
         container: {

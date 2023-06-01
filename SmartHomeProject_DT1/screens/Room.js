@@ -27,7 +27,12 @@ const Room = ({ navigation, route }) => {
                     setLightStatus(parseInt(result));
                 }
                 else {
-                    setFanStatus(parseInt(result));
+                    if (parseInt(result) > 0) {
+                        setFanStatus(1);
+                    }
+                    else {
+                        setFanStatus(0);
+                    }
                 }
             } catch (error) {  
                 console.error(error);

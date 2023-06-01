@@ -20,7 +20,6 @@ const Light = ({navigation, route}) => {
                     },
                 });
                 let result = await response.json();
-                
                 setAutoMode(parseInt(result));
                 
             } catch (error) {  
@@ -30,12 +29,9 @@ const Light = ({navigation, route}) => {
         };
         getStatus('auto_mode');
     }, []);
-    
-    useEffect(() => {
-        controlAutoMode();
-    }, [autoMode]);
 
     const controlAutoMode = async () => {
+        setAutoMode(autoMode == 0 ? 1 : 0)
         try {
             const response = await fetch(HOST + '/light/handle_autoMode', {
                 method: 'POST',
@@ -56,7 +52,7 @@ const Light = ({navigation, route}) => {
         {
             name: 'Auto Mode',
             active: autoMode,
-            setActive: setAutoMode
+            setActive: controlAutoMode
         },
         {
             name: 'Saving Energy Mode',
