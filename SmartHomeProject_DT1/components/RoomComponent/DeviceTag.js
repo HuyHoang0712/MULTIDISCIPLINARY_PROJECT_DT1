@@ -1,51 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 // import fetch from "react-native-fetch";
-import { COLORS } from "../../constants";
+import { COLORS, HOST } from "../../constants";
 
 
-const DeviceTag = ({device, navigation, roomInfor}) => {
+const DeviceTag = ({ device, navigation, roomInfor, active=0, setActive=null}) => {
 
-    let { name, icon, feedName, value } = device;
-    const [active, setActive] = useState(value == 0? false:true)
+    let { name, icon } = device;
 
-    // const sendDataToServer = async () => {
+    // console.log(active)
 
-    //     const baseUrl = 'https://io.adafruit.com/api/v2/Huy_Hieu/feeds/';
-    //     const urlServerAPI = `${baseUrl}${feedName}/data`;
-
-    //     try {
-    //         const response = await fetch(urlServerAPI, {
-    //             method: 'POST',
-    //             headers: {
-    //                 accept:'application/json',
-    //                 'X-AIO-Key':'aio_eGsJ29OtlNTVZwh5RpCNlKFiq1AC',
-    //                 'Content-Type':'application/json'
-    //             },
-    //             body: JSON.stringify({value: active? 1: 0}),
-    //         });
-    
-    //         if (response.status === 200) {
-    //             const result = await response.json();
-    //             console.log(result);
-    //         } else {
-    //             // Request failed
-    //             console.error('Error:', response.status);
-    //         }
-    //     } catch (error) {
-    //         // Catch any other errors
-    //         console.error('Error:', error);
-    //     }
-    // };
-    
-
-    // useEffect(() => {
-    //     sendDataToServer()
-    // }, [active])
-
-    const onPressHandler = () => {
-        setActive(!active);
+    const controlDevice = async () => {
+        setActive(active == 0 ? 1 : 0);
+        try {
+            const response = await fetch(HOST + `/${name.toLowerCase()}/turn_on_off`, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    data: active === 0 ? '1' : '0'
+                })
+            })
+        } catch (error) {
+            console.error(error);
+        }
     };
+
+
 
     const Styles = StyleSheet.create({
         container: {
@@ -55,7 +38,7 @@ const DeviceTag = ({device, navigation, roomInfor}) => {
             padding: 30,
             alignItems: 'center',
             justifyContent: 'space-around',
-            backgroundColor: active? COLORS.primary:COLORS.white
+            backgroundColor: active === 0 ? COLORS.white : COLORS.primary
         },
         image: {
             width: 65,
@@ -65,25 +48,25 @@ const DeviceTag = ({device, navigation, roomInfor}) => {
 
     return (
         <Pressable
-            onPress={onPressHandler}
+            onPress={controlDevice}
             onLongPress={() => {
-                navigation.navigate(name, {roomInfor: roomInfor})
+                navigation.navigate(name, { roomInfor: roomInfor })
             }}
         >
-            <View style={Styles.container}> 
-                <Image 
+            <View style={Styles.container}>
+                <Image
                     source={icon}
                     style={Styles.image}
-                    tintColor={active? COLORS.white:COLORS.primary}
+                    tintColor={active === 0 ? COLORS.primary : COLORS.white}
                 />
                 <Text style={{
                     fontFamily: 'Inter-Bold',
                     fontSize: 15,
-                    color: active? COLORS.white:COLORS.primary
+                    color: active === 0 ? COLORS.primary : COLORS.white
                 }}>{name}</Text>
             </View>
         </Pressable>
-        
+
     )
 }
 

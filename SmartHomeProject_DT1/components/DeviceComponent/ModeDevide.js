@@ -6,9 +6,8 @@ import { Switch } from "react-native-paper";
 import { COLORS } from "../../constants";
 
 const ModeDevide = ({ modeInfor }) => {
-    let { name } = modeInfor
-    const [isSwitchOn, setIsSwitchOn] = React.useState(false);
-    const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+    let { name, active, setActive } = modeInfor;
+    const onToggleSwitch = () => setActive(active == 0 ? 1 : 0);
 
     const Styles = StyleSheet.create({
         container: {
@@ -16,7 +15,7 @@ const ModeDevide = ({ modeInfor }) => {
             marginBottom: 20,
             paddingVertical: 5,
             paddingHorizontal: 10,
-            backgroundColor: isSwitchOn ? COLORS.primary : COLORS.white,
+            backgroundColor: active === 0 ? COLORS.white : COLORS.primary,
             borderRadius: 10,
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -25,7 +24,7 @@ const ModeDevide = ({ modeInfor }) => {
         text: {
             fontFamily: 'Inter-SemiBold',
             fontSize: 20,
-            color: isSwitchOn ? COLORS.white : COLORS.black,
+            color: active === 0 ? COLORS.black : COLORS.white,
         },
         shadow: {
             shadowColor: "#000",
@@ -46,7 +45,7 @@ const ModeDevide = ({ modeInfor }) => {
         >
             <Text style={Styles.text}>{name}</Text>
             <Switch
-                value={isSwitchOn}
+                value={active === 0? false:true}
                 onValueChange={onToggleSwitch}
                 color={COLORS.secondary}
                 style={{

@@ -1,38 +1,59 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import { IconButton } from "react-native-paper";
 
-import { icons, COLORS, SIZES } from "../constants";
+import { icons, COLORS, SIZES, HOST } from "../constants";
 import { WeatherTag } from "../components/HomeComponent";
 import { DeviceManage, DeviceTag } from "../components/RoomComponent";
 
 const Room = ({ navigation, route }) => {
     let { roomInfor } = route.params;
 
+    const [lightStatus, setLightStatus] = useState(0);
+    const [fanStatus, setFanStatus] = useState(0);
+
+    useEffect(() => {
+        const getStatus = async (device) => {
+            try {
+                const response = await fetch(HOST + `/${device}/get_status`, {
+                    method: 'GET',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                });
+                let result = await response.json();
+                if (device === 'light') {
+                    setLightStatus(parseInt(result));
+                }
+                else {
+                    setFanStatus(parseInt(result));
+                }
+            } catch (error) {  
+                console.error(error);
+                return 0;
+            }
+        };
+        getStatus('light');
+        getStatus('fan');
+    }, [])
+
     const devices = [
         {
             name: 'Light',
             icon: icons.light,
-            feedName: 'nutnhan2',
-            value: 0
         },
         {
             name: 'Sound',
             icon: icons.sound,
-            feedName: 'nutnhan2',
-            value: 0
         },
         {
             name: 'Fan',
             icon: icons.fan,
-            feedName: 'nutnhan1',
-            value: 0
         },
         {
             name: 'Heater',
             icon: icons.heater,
-            feedName: 'nutnhan2',
-            value: 0
         }
     ]
 
@@ -74,11 +95,11 @@ const Room = ({ navigation, route }) => {
                 <DeviceManage />
                 <View style={Styles.deviceContainer}>
                     <View style={Styles.box1}>
-                        <DeviceTag device={devices[0]} navigation={navigation} roomInfor={roomInfor}/>
+                        <DeviceTag device={devices[0]} navigation={navigation} roomInfor={roomInfor} active={lightStatus} setActive={setLightStatus}/>
                         <DeviceTag device={devices[1]} navigation={navigation} roomInfor={roomInfor}/>
                     </View>
                     <View style={Styles.box1}>
-                        <DeviceTag device={devices[2]} navigation={navigation} roomInfor={roomInfor}/>
+                        <DeviceTag device={devices[2]} navigation={navigation} roomInfor={roomInfor} active={fanStatus} setActive={setFanStatus}/>
                         <DeviceTag device={devices[3]} navigation={navigation} roomInfor={roomInfor}/>
                     </View>
                 </View>
