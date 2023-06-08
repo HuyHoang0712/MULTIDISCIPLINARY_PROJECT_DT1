@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, StyleSheet, Image, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+
+import { AppContext } from "../context/AppContext";
 import { CustomInput, CustomButton } from "../components";
 import { icons, FONTS, COLORS, HOST } from "../constants";
 
 const Login = () => {
+    const { dispatch } = useContext(AppContext);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -33,9 +36,12 @@ const Login = () => {
                     })
                 });
                 let result = await response.json();
-                console.log(result);
                 if (response.status === 200) {
-                    navigation.navigate('Main', { accountInfor: result });
+                    dispatch({
+                        flag: 'INIT_USER',
+                        payload: result
+                    })
+                    navigation.navigate('Main');
                 } 
                 else {{
                     Alert.alert(

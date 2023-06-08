@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
     View,
     Text,
@@ -8,6 +8,8 @@ import {
     Alert,
     Image,
 } from "react-native";
+
+import { AppContext } from "../context/AppContext";
 import { Avatar, Provider } from "react-native-paper";
 import { images, COLORS, icons, HOST } from "../constants";
 
@@ -18,32 +20,10 @@ import {
 } from "../components/UserProfileComponent";
 import { SharedAccessTag } from "../components/HomeComponent";
 
-const sharedPeople = [
-    {
-        id: 0,
-        name: "Huy Hieu",
-        image: images.person1,
-    },
-    {
-        id: 1,
-        name: "Viet Thang",
-        image: images.person2,
-    },
-    {
-        id: 2,
-        name: "Thanh Phuc",
-        image: images.person3,
-    },
-    {
-        id: 3,
-        name: "Kiet Huynh",
-        image: images.person3,
-    },
-];
 
 const UserProfile = ({ navigation, route }) => {
-    const [accountInfor, setAccountInfor] = useState(route.params.accountInfor);
-    const [accessPeople, setAccessPeople] = useState(sharedPeople);
+
+    const { user, dispatch, accessPeople } = useContext(AppContext);
     const [updatePassword, setUpdatePassword] = useState(false);
     const [updatePhone, setUpdatePhone] = useState(false);
     const [updateEmail, setUpdateEmail] = useState(false);
@@ -73,7 +53,7 @@ const UserProfile = ({ navigation, route }) => {
         } else {
             try {
                 const response = await fetch(
-                    HOST + `/user/update-password/${accountInfor._id}`,
+                    HOST + `/user/update-password/${user._id}`,
                     {
                         method: "POST",
                         headers: {
@@ -87,7 +67,10 @@ const UserProfile = ({ navigation, route }) => {
                 );
 
                 let result = await response.json();
-                setAccountInfor(result);
+                dispatch({
+                    flag: 'UPDATE_PASSWORD',
+                    payload: result
+                })
                 setUpdatePassword(false);
                 Alert.alert("Update Successfully!", "", [{ text: "OK" }]);
             } catch (error) {
@@ -103,7 +86,7 @@ const UserProfile = ({ navigation, route }) => {
         } else {
             try {
                 const response = await fetch(
-                    HOST + `/user/update-phone/${accountInfor._id}`,
+                    HOST + `/user/update-phone/${user._id}`,
                     {
                         method: "POST",
                         headers: {
@@ -116,7 +99,10 @@ const UserProfile = ({ navigation, route }) => {
                     }
                 )
                 let result = await response.json();
-                setAccountInfor(result);
+                dispatch({
+                    flag: 'UPDATE_PHONE',
+                    payload: result
+                })
                 setUpdatePhone(false);
                 Alert.alert("Update Successfully!", "", [{ text: "OK" }]);
             } catch (error) {
@@ -132,7 +118,7 @@ const UserProfile = ({ navigation, route }) => {
         } else {
             try {
                 const response = await fetch(
-                    HOST + `/user/update-email/${accountInfor._id}`,
+                    HOST + `/user/update-email/${user._id}`,
                     {
                         method: "POST",
                         headers: {
@@ -145,7 +131,10 @@ const UserProfile = ({ navigation, route }) => {
                     }
                 )
                 let result = await response.json();
-                setAccountInfor(result);
+                dispatch({
+                    flag: 'UPDATE_EMAIL',
+                    payload: result
+                });
                 setUpdateEmail(false);
                 Alert.alert("Update Successfully!", "", [{ text: "OK" }]);
             } catch (error) {
@@ -154,9 +143,11 @@ const UserProfile = ({ navigation, route }) => {
         };
     };
 
-    const removePeople = (id) => {
-        let tmpList = accessPeople.filter((item) => item.id !== id);
-        setAccessPeople(tmpList);
+    const removePeople = (name) => {
+        dispatch({
+            flag: 'DEL_SHAREDPEOPLE',
+            payload: name
+        })
     };
 
     const logout = () => {
@@ -178,13 +169,13 @@ const UserProfile = ({ navigation, route }) => {
                         My Profile
                     </Text>
                     <View style={Styles.subHeader}>
-                        <Avatar.Image source={{ uri: accountInfor.image }} size={100} />
+                        <Avatar.Image source={{ uri: user.image }} size={100} />
                         <View style={Styles.headerInfor}>
                             <Text style={{ fontFamily: "Inter-SemiBold", fontSize: 20 }}>
-                                {accountInfor.name}
+                                {user.name}
                             </Text>
                             <Text style={{ fontFamily: "Inter-Regular", fontSize: 15 }}>
-                                #{accountInfor._id.substr(-6, 6)}
+                                #{user._id.substr(-6, 6)}
                             </Text>
                         </View>
                     </View>
@@ -197,27 +188,27 @@ const UserProfile = ({ navigation, route }) => {
                             <InforTag
                                 icon={icons.username}
                                 title="Username"
-                                text={accountInfor.username}
+                                text={user.username}
                                 editInfor={null}
                             />
                             <InforTag
                                 icon={icons.key}
                                 title="Password"
-                                text={accountInfor.password}
+                                text={user.password}
                                 funcIcon={icons.edit_pen}
                                 openDialog={setUpdatePassword}
                             />
                             <InforTag
                                 icon={icons.phone}
                                 title="Phone"
-                                text={accountInfor.phone}
+                                text={user.phone}
                                 funcIcon={icons.edit_pen}
                                 openDialog={setUpdatePhone}
                             />
                             <InforTag
                                 icon={icons.mail}
                                 title="Email"
-                                text={accountInfor.email}
+                                text={user.email}
                                 funcIcon={icons.edit_pen}
                                 openDialog={setUpdateEmail}
                             />

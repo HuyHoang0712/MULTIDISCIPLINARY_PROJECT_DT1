@@ -4,7 +4,7 @@ import { Avatar, IconButton } from 'react-native-paper';
 
 import { icons, COLORS } from "../../constants";
 const SharedAccessTag = ({ props, navigation, type=false, remove = null }) => {
-    const {image, name, id} = props;
+    const {image, name} = props;
 
     return (
         <View style={Styles.container}>
@@ -12,7 +12,7 @@ const SharedAccessTag = ({ props, navigation, type=false, remove = null }) => {
             {type? (
                 <View style={Styles.subContainer}> 
                     <Text style={Styles.text}>{name}</Text>
-                    <IconButton icon={icons.remove_person} size={20} iconColor={COLORS.primary} style={{backgroundColor: 'transparent'}} onPress={() => remove(id)}/>
+                    <IconButton icon={icons.remove_person} size={20} iconColor={COLORS.primary} style={{backgroundColor: 'transparent'}} onPress={() => remove(name)}/>
                 </View>
             ):null}
         </View>

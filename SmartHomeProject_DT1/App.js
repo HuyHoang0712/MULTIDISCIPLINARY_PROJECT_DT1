@@ -4,9 +4,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import * as Font from "expo-font";
 import { StyleSheet, Text, View } from "react-native";
 
+import { AppProvider } from "./context/AppContext";
 import Login from "./screens/Login";
 import { Room, Light, Fan } from "./screens";
 import { Tabs } from "./components";
+
 
 const Stack = createStackNavigator();
 
@@ -30,19 +32,22 @@ export default function App() {
     return <Text>Loading...</Text>;
   }
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-        initialRouteName={"Login"}
-      >
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Main" component={Tabs} />
-        <Stack.Screen name="Room" component={Room} />
-        <Stack.Screen name="Light" component={Light} />
-        <Stack.Screen name="Fan" component={Fan} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AppProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+          initialRouteName={"Login"}
+        >
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Main" component={Tabs} />
+          <Stack.Screen name="Room" component={Room} />
+          <Stack.Screen name="Light" component={Light} />
+          <Stack.Screen name="Fan" component={Fan} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppProvider>
+
   );
 }

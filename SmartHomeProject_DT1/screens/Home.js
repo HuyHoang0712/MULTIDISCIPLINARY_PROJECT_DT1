@@ -1,32 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, StatusBar } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
+
+import { AppContext } from "../context/AppContext";
 import { icons, images, COLORS } from "../constants";
 import { WeatherTag, HomeTag, SharedAccessTag, RoomTag } from "../components/HomeComponent"
 import { darkColors } from "@rneui/base";
 
-const Home = ({navigation, route}) => {
+const Home = ({navigation}) => {
 
-    const { accountInfor } = route.params;
-    const accessPeople = [
-        {
-            name: 'Huy Hieu',
-            image: images.person1
-        },
-        {
-            name: 'Viet Thang',
-            image: images.person2
-        },
-        {
-            name: 'Thanh Phuc',
-            image: images.person3
-        },
-        {
-            name: 'Huy Hieu',
-            image: images.person3
-        },
-    ]
+    const { user, accessPeople } = useContext(AppContext);
 
     const rooms = [
         {
@@ -57,7 +40,7 @@ const Home = ({navigation, route}) => {
                         fontSize: 25,
                         color: COLORS.black
                     }}
-                >Hello {accountInfor.name}!</Text>
+                >Hello {user.name}!</Text>
                 <Text
                     style={{
                         fontFamily: 'Inter-Regular',

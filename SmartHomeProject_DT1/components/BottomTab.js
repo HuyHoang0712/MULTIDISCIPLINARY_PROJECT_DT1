@@ -10,7 +10,6 @@ const Tab = createBottomTabNavigator();
 
 const Tabs = ({route}) => {
 
-    const { accountInfor } = route.params;
     return (
         <Tab.Navigator
             screenOptions={{
@@ -22,7 +21,6 @@ const Tabs = ({route}) => {
             <Tab.Screen 
                 name="Home"
                 component={Home}
-                initialParams={{accountInfor: accountInfor}}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Avatar.Icon 
@@ -39,7 +37,6 @@ const Tabs = ({route}) => {
             <Tab.Screen 
                 name="UserProfile"
                 component={UserProfile}
-                initialParams={{accountInfor: accountInfor}}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Avatar.Icon 
