@@ -13,9 +13,9 @@ def getTemp():
     
     return jsonify(data.value)
 
-# @humid_bp.route('/', methods=['GET'])
-# def getHumid():
-#     data = aio.receive('bbc-temp')
+@humid_bp.route('/', methods=['GET'])
+def getHumid():
+    data = aio.receive('bbc-humid')
     
-#     return jsonify(data.value)
+    return jsonify(data.value)
     

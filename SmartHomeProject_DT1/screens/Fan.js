@@ -4,13 +4,14 @@ import { View, Image, StyleSheet, Text, ScrollView } from "react-native";
 import { HeaderDevice, SliderInput, ModeDevide, AdvancedMode, FanPower } from "../components/DeviceComponent";
 import { images, icons, COLORS, HOST } from "../constants";
 
-const Fan = ({navigation, route}) => {
+const Fan = ({ navigation, route }) => {
 
     let { roomInfor, setActive } = route.params;
     const deviceInfor = {
         name: 'Fan',
         curPower: 0.8
     }
+
 
     const [autoMode, setAutoMode] = useState(0);
     const [savePower, setSavePower] = useState(0);
@@ -27,8 +28,8 @@ const Fan = ({navigation, route}) => {
                 });
                 let result = await response.json();
                 setAutoMode(parseInt(result));
-                
-            } catch (error) {  
+
+            } catch (error) {
                 console.error(error);
                 return 0;
             }
@@ -53,7 +54,6 @@ const Fan = ({navigation, route}) => {
             console.error(error);
         }
     };
-
 
     const deviceMode = [
         {
@@ -81,24 +81,24 @@ const Fan = ({navigation, route}) => {
         },
     ]
 
-    
+
     return (
         <View style={Styles.container}>
-            <HeaderDevice navigation={navigation} roomInfor={roomInfor} type="Fan"/>
-            <FanPower setActive={setActive}/>
+            <HeaderDevice navigation={navigation} roomInfor={roomInfor} type="Fan" />
+            <FanPower setActive={setActive} />
             <ScrollView
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={{ alignItems: 'center'}}
+                contentContainerStyle={{ alignItems: 'center' }}
                 style={Styles.scrollview}
             >
-                {deviceMode.map((mode, index) => 
-                    <ModeDevide key={index} modeInfor={mode}/>
+                {deviceMode.map((mode, index) =>
+                    <ModeDevide key={index} modeInfor={mode} />
                 )}
-                {advancedMode.map((mode, index) => 
-                    <AdvancedMode key={index} modeInfor={mode}/>
+                {advancedMode.map((mode, index) =>
+                    <AdvancedMode key={index} modeInfor={mode} />
                 )}
             </ScrollView>
-            
+
         </View>
     );
 };
