@@ -25,8 +25,8 @@ const HeaderDevice = ({navigation, roomInfor, type}) => {
                 >{roomInfor.name}</Text>
             </View>
             <Image
-                source={type == "LIGHT"? images.light:images.light}
-                style={Styles.image}
+                source={type === "LIGHT"? images.light : images.fan}
+                style={type === "LIGHT"? Styles.image_light : Styles.image_fan}
             />
         </View>
     );
@@ -38,10 +38,15 @@ const Styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: '100%',
     },
-    image: {
+    image_light: {
         height: 300,
         width: 190,
         resizeMode: 'cover'
+    },
+    image_fan: {
+        height: 300,
+        width: 190,
+        resizeMode: 'contain'
     },
     text: {
         fontFamily: 'Inter-Bold',

@@ -115,7 +115,7 @@ const Room = ({ navigation, route }) => {
                                 fontSize: 20,
                                 color: COLORS.white
                             }}
-                        >Power Consumtion</Text>
+                        >Power Consumption</Text>
                         <View style={Styles.box2}>
                             <Text style={Styles.text}>Usage Today:</Text>
                             <Text style={Styles.text}>64 kW</Text>

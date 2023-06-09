@@ -82,7 +82,7 @@ const Light = ({navigation, route}) => {
     let { roomInfor } = route.params;
     return (
         <View style={Styles.container}>
-            <HeaderDevice navigation={navigation} roomInfor={roomInfor} type="Light"/>
+            <HeaderDevice navigation={navigation} roomInfor={roomInfor} type="LIGHT"/>
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ alignItems: 'center'}}

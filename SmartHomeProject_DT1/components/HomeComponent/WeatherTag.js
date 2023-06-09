@@ -6,8 +6,8 @@ import { COLORS, images, HOST } from "../../constants";
 
 const WeatherTag = ({ type }) => {
 
-    const [temp, setTemp] = useState(60);
-    const [humidity, setHumidity] = useState(60);
+    const [temp, setTemp] = useState('');
+    const [humidity, setHumidity] = useState('');
 
     useEffect(() => {
         const timerId = setInterval(() => {

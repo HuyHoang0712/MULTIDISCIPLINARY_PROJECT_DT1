@@ -84,7 +84,7 @@ const Fan = ({ navigation, route }) => {
 
     return (
         <View style={Styles.container}>
-            <HeaderDevice navigation={navigation} roomInfor={roomInfor} type="Fan" />
+            <HeaderDevice navigation={navigation} roomInfor={roomInfor} type="FAN" />
             <FanPower setActive={setActive} />
             <ScrollView
                 showsVerticalScrollIndicator={false}

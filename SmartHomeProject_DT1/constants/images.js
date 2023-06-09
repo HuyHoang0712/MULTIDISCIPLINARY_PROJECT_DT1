@@ -7,6 +7,7 @@ export const person1 = require("../assets/images/person1.png");
 export const person2 = require("../assets/images/person2.png");
 export const person3 = require("../assets/images/person3.png");
 export const light = require("../assets/images/light_image.png");
+export const fan = require("../assets/images/fan_image.png");
 
 export default {
     livingroom,
@@ -17,5 +18,6 @@ export default {
     person1,
     person2,
     person3,
-    light
+    light,
+    fan
 }
